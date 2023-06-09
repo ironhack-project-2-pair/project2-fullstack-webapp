@@ -17,6 +17,11 @@ router.get("/", async (req, res, next) => {
       const currentUser =  await User.findById(req.session.currentUser._id)
         .populate('feeds');
 
+      if(currentUser.feeds.length === 0) {
+        res.render("auth/user-profile");
+        return;
+      }
+      
       // console.log("Current user feeds", currentUser);
       const feedContent = [];
       const feeds = currentUser.feeds;
