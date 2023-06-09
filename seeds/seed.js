@@ -5,9 +5,6 @@ const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/project2
 
 
 const feeds = [
-    {
-        url: "http://xkcd.com/atom.xml",
-    },
     { url: 'https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest' },
     { url: 'http://xkcd.com/atom.xml' },
     { url: 'https://www.lemonde.fr/rss/une.xml' },

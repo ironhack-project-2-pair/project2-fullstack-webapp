@@ -24,7 +24,7 @@ router.get("/", async (req, res, next) => {
         //console.log("content:", content);
         
         const now = new Date();
-        content.items.forEach(i => i.formatedDate = formatDate(new Date(i.published), now))
+        content.items.forEach(i => i.formatedDate = formatDate(new Date(i.created), now))
         feedContent.push(content);
       }
 
