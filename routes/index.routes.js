@@ -3,6 +3,7 @@ const router = express.Router();
 const { parse } = require('rss-to-json');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const Feed = require('../models/Feed.model');
+const User = require('../models/User.model');
 
 /* GET home page */
 router.get("/", async (req, res, next) => {
@@ -13,9 +14,12 @@ router.get("/", async (req, res, next) => {
   }
   
   try {
-      // console.log("Get feeds");
+      const currentUser =  await User.findById(req.session.currentUser._id)
+        .populate('feeds');
+
+      // console.log("Current user feeds", currentUser);
       const feedContent = [];
-      const feeds = await Feed.find();
+      const feeds = currentUser.feeds;
       //console.log("feeddd:", feeds);
       for (let i = 0; i < feeds.length; i++) {
         const feed = feeds[i];
