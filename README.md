@@ -10,7 +10,7 @@ RSS Feed
 * CRUD on user's feeds
 * Display of posts of feeds Ordered by date (Display: title & date)
 * Support Rss Or Atom (atom: youtube, lemonde) https://www.npmjs.com/package/rss-to-json
-* 
+
 
 ### Nice
 
@@ -23,7 +23,7 @@ RSS Feed
 * Extract feeds from a web page
 * See other users feeds and subscribe to it
 * Save posts in a DB
-* Query online RSS feed DB (if it exists!)
+* Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 * tags and like feed and search on it
 
 ## Model
@@ -31,10 +31,10 @@ RSS Feed
 * User
     * email: String
     * password: String
-    * Feeds: [Feed+] {User title: String & Feed}
+    * Feeds: [Feed+] {User title: String & Feed, ClearingDate}
 
 * Feed
-    * user_id : null 
+    
     * titre : String
     * url: String
     * url favicon : Binary / String
