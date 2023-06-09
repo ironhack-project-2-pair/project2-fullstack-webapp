@@ -23,6 +23,8 @@ const projectName = "project2-fullstack-webapp-feedsreader";
 
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
+app.use(require("./middleware/session"))
+
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);
