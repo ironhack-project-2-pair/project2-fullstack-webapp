@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Feed = require('../models/Feed.model');
+const User = require('../models/User.model');
 
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/project2-fullstack-webapp-feedsreader';
 
@@ -15,7 +16,7 @@ const feeds = [
     { url: 'https://cprss.s3.amazonaws.com/javascriptweekly.com.xml' },
 ];
 
-
+let firstUser;
 mongoose
   .connect(MONGO_URI)
   .then((x) => {
@@ -25,12 +26,18 @@ mongoose
   })
   .then( (response) => {
     console.log(response);
-
+    return User.findOne()
+  })
+  .then(user => {
+    firstUser = user;
+    console.log("Found user", firstUser);
     return Feed.insertMany(feeds);
   })
   .then(feedsFromDB => {
     console.log(`Created ${feedsFromDB.length} feeds`);
-
+    return User.findByIdAndUpdate(firstUser._id, {feeds: feedsFromDB.map(f => f._id)});
+  })
+  .then(() => {
     // Once created, close the DB connection
     mongoose.connection.close();
   })

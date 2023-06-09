@@ -19,6 +19,10 @@ const userSchema = new Schema({
       type: String,
       required: true,
     },
+    feeds: [{
+      type: Schema.Types.ObjectId,
+      ref: "Feed"
+    }]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
