@@ -1,9 +1,19 @@
-<h1>{{appTitle}} 🚀</h1>
-<p>Welcome Ironhacker!</p>
+{{log this}}
 
-<a href="/auth/login">Login</a>
-<a href="/auth/signup">Sign up</a>
-<a href="/auth/logout">Logout</a>
-<a href="/auth/user-profile">User Profile</a>
+<header>
+    {{#if session.currentUser}}
+        <a href="/auth/logout">Logout</a>
+        <a href="/auth/user-profile">User Profile</a>
+    {{else}}
+        <a href="/auth/login">Login</a>
+        <a href="/auth/signup">Sign up</a>
+    {{/if}}
+</header>
 
-{{> feeds feedContent}}
+<h1>Feed Reader</h1>
+    {{#if session.currentUser}}
+        {{> feeds feeds}}
+    {{else}}
+        Please <a href="/auth/login">Login</a> to see your feeds.
+        Don't have an account, please <a href="/auth/signup">Sign up</a>.
+    {{/if}}
