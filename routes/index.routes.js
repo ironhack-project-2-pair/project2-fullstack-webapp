@@ -40,6 +40,11 @@ router.get("/", async (req, res, next) => {
           //content.items.sort((a, b) => a - b);
           const now = new Date();
           content.items.forEach(i => i.formatedDate = formatDate(new Date(i.created), now))
+          // Handle specific case (at the moment) where title is not a string :(
+          if (typeof content.title === "object") {
+            content.title = content.title["$text"];
+          }
+
           feedContent.push(content);
         } catch (error) {
           feedsInError.push({ url: feed.url, errorMessage: error});
