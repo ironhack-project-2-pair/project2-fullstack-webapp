@@ -2,7 +2,7 @@
 {{!-- {{log "feedContent" this}} --}}
 
 
-{{#each this}}
+{{#each this.feeds}}
 
     <h2>{{title}} ({{items.length}})</h2>
         <ul>
@@ -13,4 +13,18 @@
             </li>
         {{/each}}
         </ul>
+{{else}}
+    <span>No feeds configured. Please add one.</span>
 {{/each}}
+
+{{#if this.feedsInError}}
+
+<div>
+    <span>Feeds in error</span>
+    <ul>
+    {{#each this.feedsInError}}
+        <li> {{url}}: {{errorMessage}}</li>
+    {{/each}}
+    </ul>
+</div>
+{{/if}}

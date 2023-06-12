@@ -27,19 +27,25 @@ router.get("/", async (req, res, next) => {
       const feedContent = [];
       const feeds = currentUser.feeds;
       //console.log("feeddd:", feeds);
+      const feedsInError = [];
       for (let i = 0; i < feeds.length; i++) {
         const feed = feeds[i];
+        try {
+          const content = await parse(feed.url);
+          //console.log("content:", content);
+          
+          //content.items.sort((a, b) => a - b);
+          const now = new Date();
+          content.items.forEach(i => i.formatedDate = formatDate(new Date(i.created), now))
+          feedContent.push(content);
+        } catch (error) {
+          feedsInError.push({ url: feed.url, errorMessage: error});
+        }
         // console.log("url:", feed.url);
-        const content = await parse(feed.url);
-        //console.log("content:", content);
-        
-        const now = new Date();
-        content.items.forEach(i => i.formatedDate = formatDate(new Date(i.created), now))
-        feedContent.push(content);
       }
 
       // console.log("feeds", feedContent);
-      res.render("index", { feeds : feedContent });
+      res.render("index", { feeds : feedContent, feedsInError });
 
   } catch (error) {
     console.log('error', error);

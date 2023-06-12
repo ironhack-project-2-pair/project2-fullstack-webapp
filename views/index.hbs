@@ -12,7 +12,7 @@
 
 <h1>Feed Reader</h1>
     {{#if session.currentUser}}
-        {{> feeds feeds}}
+        {{> feeds this}}
     {{else}}
         Please <a href="/auth/login">Login</a> to see your feeds.
         Don't have an account, please <a href="/auth/signup">Sign up</a>.
