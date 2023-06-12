@@ -11,7 +11,6 @@ RSS Feed
 * Display of posts of feeds Ordered by date (Display: title & date)
 * Support Rss Or Atom (atom: youtube, lemonde) https://www.npmjs.com/package/rss-to-json
 
-
 ### Nice
 
 * Rss && Atom
@@ -25,19 +24,21 @@ RSS Feed
 * Save posts in a DB
 * Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 * tags and like feed and search on it
+* read/unread items in feeds (different whether feeds merged or separated)
 
 ## Model
 
 * User
     * email: String
     * password: String
-    * Feeds: [Feed+] {User title: String & Feed, ClearingDate}
+    * Feeds: [Feed]
 
 * Feed
-    
     * titre : String
     * url: String
     * url favicon : Binary / String
     * tags [string]
 
 (* Posts)
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
