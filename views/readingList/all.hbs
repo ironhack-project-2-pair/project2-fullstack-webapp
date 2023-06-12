@@ -1,0 +1,16 @@
+
+<h1>Your reading list</h1>
+
+<a href="/">Return to your feeds list</a>
+
+<ul>
+{{#each this.links}}
+    <li>
+        <span><a href="{{url}}" target="_blank">{{title}}</a></span>
+    </li>
+{{else}}
+    <span>Reading list empty \o/</span>
+{{/each}}
+</ul>
+
+<a href="/">Return to your feeds list</a>

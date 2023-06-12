@@ -8,7 +8,8 @@
         <ul>
         {{#each items}}
             <li>
-                <span>{{formatedDate}}</span>
+                <span>[{{formatedDate}} | <a  onclick="(() => addToReadList('{{title}}',
+                     '{{id}}'))()" href="javascript:void(0);" >📑</a>]</span>
                 <span><a href="{{id}}" target="_blank">{{title}}</a></span>
             </li>
         {{/each}}
