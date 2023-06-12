@@ -2,6 +2,8 @@
 
 <p>Email: <span>{{_locals.session.currentUser.email}}</span></p>
 
+<a href="/feeds/create">Add Feed</a>
+
 {{#if feeds}}
     <h2>My Feeds</h2>
         {{#each feeds}}
@@ -9,6 +11,10 @@
                 <li>{{this.title}}</li>
                 <li>{{this.url}}</li>
             </ul>
+            <a href="/feeds/edit/{{this._id}}">Edit</a>
+            <form method ="POST" action="/feeds/delete/{{this._id}}">
+                <button type="submit"> Delete </button>
+            </form>
         {{/each}}
 {{else}}
     <h2>No Feeds</h2>

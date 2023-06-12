@@ -14,38 +14,36 @@ router.get("/", async (req, res, next) => {
     return;
   }
   
+  /********/
+  /* READ */
+  /********/
+
   try {
       const currentUser =  await User.findById(req.session.currentUser._id)
         .populate('feeds');
 
       if(currentUser.feeds.length === 0) {
-        res.render("auth/user-profile");
+        res.render("/auth/user-profile");
         return;
       }
       
-      // console.log("Current user feeds", currentUser);
       const feedContent = [];
       const feeds = currentUser.feeds;
-      //console.log("feeddd:", feeds);
       for (let i = 0; i < feeds.length; i++) {
         const feed = feeds[i];
-        // console.log("url:", feed.url);
         const content = await parse(feed.url);
-        //console.log("content:", content);
-        
         const now = new Date();
         content.items.forEach(i => i.formatedDate = formatDate(new Date(i.created), now))
         feedContent.push(content);
       }
 
-      // console.log("feeds", feedContent);
       res.render("index", { feeds : feedContent });
 
   } catch (error) {
     console.log('error', error);
     res.send('error parsing feed:' + error);
   }
-  // res.render("index");
+
 });
 
 module.exports = router;
