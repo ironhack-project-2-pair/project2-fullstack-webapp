@@ -14,6 +14,7 @@ const User = require("../models/User.model");
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const FeedModel = require("../models/Feed.model");
 
 // GET /auth/signup
 router.get("/signup", isLoggedOut, (req, res) => {
@@ -155,7 +156,11 @@ router.get("/logout", isLoggedIn, (req, res) => {
 
 // GET /user-profile
 router.get("/user-profile", isLoggedIn, (req, res) => {
-  res.render("auth/user-profile");
+  FeedModel.find()
+    .then(feeds => {
+      res.render("auth/user-profile", {feeds: feeds});
+    })
+  
 });
 
 module.exports = router;

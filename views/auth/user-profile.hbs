@@ -1,0 +1,15 @@
+<h1>User profile</h1>
+
+<p>Email: <span>{{_locals.session.currentUser.email}}</span></p>
+
+{{#if feeds}}
+    <h2>My Feeds</h2>
+        {{#each feeds}}
+            <ul>
+                <li>{{this.title}}</li>
+                <li>{{this.url}}</li>
+            </ul>
+        {{/each}}
+{{else}}
+    <h2>No Feeds</h2>
+{{/if}}
