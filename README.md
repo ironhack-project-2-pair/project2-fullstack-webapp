@@ -9,17 +9,17 @@ RSS Feed
 * User account
 * CRUD on user's feeds
 * Display of posts of feeds Ordered by date (Display: title & date)
-* Support Rss Or Atom (atom: youtube, lemonde) https://www.npmjs.com/package/rss-to-json
+* Support Atom (atom: youtube, lemonde) https://www.npmjs.com/package/rss-to-json
 
 ### Nice
 
-* Rss && Atom
-* Feed favicon
+* Rss http://rss.slashdot.org/Slashdot/slashdot
+* Reading list
 * Display of content of feeds by feeds
 * Being able to order feeds
-* Reading list
 * Preview of posts
 * Extract feeds from a web page
+    * Feed favicon
 * See other users feeds and subscribe to it
 * Save posts in a DB
 * Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
