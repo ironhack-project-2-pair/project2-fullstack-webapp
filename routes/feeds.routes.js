@@ -5,6 +5,7 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 const FeedModel = require("../models/Feed.model")
+const UserModel = require("../models/User.model")
 
 /**********/
 /* CREATE */
@@ -15,12 +16,20 @@ router.get("/create", isLoggedIn, (req, res) => {
 })
 
 router.post("/create", isLoggedIn, (req, res) => {
-    FeedModel.create(req.body)
+    let user;
+    UserModel.findById(req.session.currentUser._id)
+        .then(userFromDB => {
+            user = userFromDB;
+            return FeedModel.create(req.body)
+        })
+        .then((feedFromDB) => {
+            user.feeds.push(feedFromDB)
+            return UserModel.findByIdAndUpdate(user._id, user)
+        })
         .then(() => {
             res.redirect("/auth/user-profile")
         })
         .catch(e => {console.log(e)})
-    
 })
 
 /********/

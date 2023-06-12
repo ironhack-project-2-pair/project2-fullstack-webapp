@@ -8,7 +8,7 @@ const User = require('../models/User.model');
 
 /* GET home page */
 router.get("/", async (req, res, next) => {
-  console.log("req.session.currentUser", req.session.currentUser);
+  // console.log("req.session.currentUser", req.session.currentUser);
   if(!req.session.currentUser) {
     res.render("index", { });
     return;
