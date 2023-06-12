@@ -2,7 +2,11 @@
 {{!-- {{log "feedContent" this}} --}}
 
 {{#each this.feeds}}
-    <h2>{{title}} ({{items.length}})</h2>
+    <h2>
+        {{#if faviconUrl}}
+            <img src="{{faviconUrl}}" alt="{{title}} favicon">
+        {{/if}}
+        {{title}} ({{items.length}})</h2>
         <ul>
         {{#each items}}
             <li>

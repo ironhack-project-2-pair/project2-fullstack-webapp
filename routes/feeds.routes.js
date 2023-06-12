@@ -7,6 +7,11 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 const FeedModel = require("../models/Feed.model")
 const UserModel = require("../models/User.model")
 
+const tryFetchFeedContent = require("../utils/fetchFeed")
+
+const HTMLParser = require("node-html-parser")
+const URL = require("node:url")
+
 /**********/
 /* CREATE */
 /**********/
@@ -50,6 +55,48 @@ router.post("/edit/:id", isLoggedIn, (req, res) => {
             res.redirect("/auth/user-profile")
         })
         .catch(e => {console.log(e)})
+})
+
+router.get("/details", isLoggedIn, async (req, res) => {
+    const result = {};
+    console.log("url", req.query.url);
+    const response = await fetch(req.query.url);
+    const body = await response.text();
+    // console.log("body", body);
+    const parsedBody = HTMLParser.parse(body);
+    console.log("parse", parsedBody);
+
+    try {
+        //Try to get favicon
+        const favicon = parsedBody.querySelector('link[rel="shortcut icon"]');
+        console.log("favicon", favicon._attrs.href);
+        const faviconUrl = new URL.URL(favicon._attrs.href, req.query.url);
+        console.log("favicon url", faviconUrl);
+        result.faviconUrl = faviconUrl.href;
+    } catch (error) {
+        console.log("Fail to get favicon :(", error);
+    }
+
+    try {
+        // try to get rss feed url
+        const rssFeed = parsedBody.querySelector('link[type="application/rss+xml"]');
+        console.log("rss", rssFeed);
+        console.log("rss", rssFeed._attrs.href);
+        const rssUrl = new URL.URL(rssFeed._attrs.href, req.query.url);
+        console.log("rss url", rssUrl);
+        result.rssUrl = rssUrl.href;
+    } catch (error) {
+        return result;
+    }
+
+    if (result.rssUrl) {
+        const feedResult = await tryFetchFeedContent(result.rssUrl);
+        if (feedResult.success) {
+        result.title = feedResult.content.title;
+        }
+    }
+
+    res.json(result);
 })
 
 /**********/

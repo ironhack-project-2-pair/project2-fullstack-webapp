@@ -9,12 +9,12 @@
 {{#if feeds}}
     <h2>My Feeds</h2>
         {{#each feeds}}
-            <ul>
-                <li>{{this.title}}</li>
-                <li>{{this.url}}</li>
-            </ul>
-            <a href="/feeds/edit/{{this._id}}">Edit</a>
-            <form method ="POST" action="/feeds/delete/{{this._id}}">
+            {{#if faviconUrl}}
+                <img src="{{faviconUrl}}" alt="{{title}} favicon">
+            {{/if}}
+            <span>{{title}} - {{url}}</span>
+            <a href="/feeds/edit/{{_id}}">Edit</a>
+            <form method ="POST" action="/feeds/delete/{{_id}}">
                 <button type="submit"> Delete </button>
             </form>
         {{/each}}

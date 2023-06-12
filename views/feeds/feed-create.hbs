@@ -1,13 +1,26 @@
 <h1>Add Feed</h1>
 
+<label>
+    Extract feed data from web Url: 
+        <input type="url" id="websiteUrl">
+</label>
+
+
+<span>-- Or -- </span>
+
 <form method="POST" action="/feeds/create">
     <label>
         Title: 
-        <input type="text" name="title">
+        <input type="text" name="title" id="title" required>
     </label>
     <label>
-        Url: 
-        <input type="url" name="url">
+        Rss Url: 
+        <input type="url" name="url" id="url" required>
+    </label>
+    <label>
+        Favicon Url: 
+        <input type="url" name="faviconUrl" id="faviconUrl">
+        Favicon preview: <img id="faviconImg" src="" alt="<feed favicon>">
     </label>
     <button type="submit"> Add </button>
 </form>

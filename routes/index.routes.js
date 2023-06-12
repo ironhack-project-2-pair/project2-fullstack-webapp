@@ -26,7 +26,7 @@ router.get("/", async (req, res, next) => {
         return;
       }
       
-      const feedContent = [];
+      const feedsContents = [];
       const feeds = currentUser.feeds;
       //console.log("feeddd:", feeds);
       const feedsInError = [];
@@ -35,20 +35,22 @@ router.get("/", async (req, res, next) => {
 
         const result = await tryFetchFeedContent(feed.url);
         if (result.success) {
-          feedContent.push(result.content);
+          const feedContent = result.content;
+          feedContent.title = feed.title ?? feedContent.title;
+          feedContent.faviconUrl = feed.faviconUrl;
+          feedsContents.push(feedContent);
         } else {
           feedsInError.push(result.error);
         }
       }
 
       // console.log("feeds", feedContent);
-      res.render("index", { feeds : feedContent, feedsInError });
+      res.render("index", { feeds : feedsContents, feedsInError });
 
   } catch (error) {
     console.log('error', error);
     res.send('error parsing feed:' + error);
   }
-
 });
 
 module.exports = router;
