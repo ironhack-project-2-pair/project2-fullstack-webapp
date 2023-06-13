@@ -30,9 +30,7 @@ function debounce(func, wait) {
   }
 }
 
-const getWebSiteDetailsWithDebounce = debounce(() => {
-  getWebSiteDetails();
-}, 500);
+const getWebSiteDetailsWithDebounce = debounce(getWebSiteDetails, 500);
 
 async function getWebSiteDetailsWithDelay(event) {
   setTimeout(getWebSiteDetails, 0);
