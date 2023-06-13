@@ -6,14 +6,42 @@ const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/project2
 
 // RSS 0.91 or RSS 2.0 or ATOM
 const feeds = [
-    { url: 'https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest' },
-    { url: 'http://xkcd.com/atom.xml' },
-    { url: 'https://www.lemonde.fr/rss/une.xml' },
-    { url: 'https://dwh.lequipe.fr/api/edito/rss?path=/' },
-    { url: 'https://www.zdnet.fr/feeds/rss/actualites/' },
-    { url: 'http://rss.slashdot.org/Slashdot/slashdot' }, // RSS 1.0 aka RDF does not work with rss-to-json package but ok with rss-parser package
-    { url: 'https://www.youtube.com/feeds/videos.xml?user=ScienceEtonnante' },
-    { url: 'https://cprss.s3.amazonaws.com/javascriptweekly.com.xml' },
+  {
+    "url": "https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest",
+    "title": "Javascript - Stack Overflow",
+    "faviconUrl": "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196"
+  },
+  {
+    "url": "http://xkcd.com/rss.xml",
+    "title": "xkcd.com",
+    "faviconUrl": "http://xkcd.com/s/919f27.ico"
+  },
+  {
+    "url": "https://www.lemonde.fr/rss/une.xml",
+    "title": "Le Monde.fr - Actualités et Infos en France et dans le monde",
+    "faviconUrl": "http://lemonde.fr/dist/assets/img/logos/favicon.ico"
+  },
+  {
+    "url": "https://dwh.lequipe.fr/api/edito/rss?path=/",
+    "title": "L'équipe",
+    "faviconUrl": "https://www.lequipe.fr/img/favicons/manifest-48x48.png"
+  },
+  { url: 'https://www.zdnet.fr/feeds/rss/actualites/' },
+  {
+    "url": "https://rss.slashdot.org/Slashdot/slashdotMain",
+    "title": "Slashdot",
+    "faviconUrl": "https://slashdot.org/favicon.ico"
+  },
+  {
+    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCaNlbnghtwlsGF-KzAFThqA",
+    "title": "Science Etonnante",
+    "faviconUrl": "https://www.youtube.com/s/desktop/374faad5/img/favicon.ico"
+  },
+  {
+    "url": "https://javascriptweekly.com/rss/",
+    "title": "JavaScript Weekly",
+    "faviconUrl": "https://javascriptweekly.com/favicon.png"
+  },
 ];
 
 let firstUser;
