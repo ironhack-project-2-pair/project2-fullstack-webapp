@@ -73,47 +73,28 @@ router.get("/details", isLoggedIn, async (req, res) => {
         return;
     }
 
-    try {
-        //Try to get favicon
-        const favicon = parsedBody.querySelector('link[rel="shortcut icon"]');
-        console.log("favicon", favicon._attrs.href);
-        const faviconUrl = new URL.URL(favicon._attrs.href, req.query.url);
-        console.log("favicon url", faviconUrl);
-        result.faviconUrl = faviconUrl.href;
-    } catch (error) {
-        console.log("Fail to get favicon :(", error);
-    }
-
-    try {
-        // try to get rss feed url
-        const rssFeed = parsedBody.querySelector('link[type="application/rss+xml"]');
-        console.log("rss", rssFeed);
-        console.log("rss", rssFeed._attrs.href);
-        const rssUrl = new URL.URL(rssFeed._attrs.href, req.query.url);
-        console.log("rss url", rssUrl);
-        result.rssUrl = rssUrl.href;
-    } catch (error) {
-        console.log("Fail to get rss feed url :(", error);
-    }
-
-    if (!result.rssUrl) {
+    const getUrlFromHtml = (querySelector) => {
         try {
-            // try to get rss feed url
-            const rssFeed = parsedBody.querySelector('link[type="application/atom+xml"]');
-            console.log("rss", rssFeed);
-            console.log("rss", rssFeed._attrs.href);
-            const rssUrl = new URL.URL(rssFeed._attrs.href, req.query.url);
-            console.log("rss url", rssUrl);
-            result.rssUrl = rssUrl.href;
+            const linkHtmlElement = parsedBody.querySelector(querySelector);
+            //console.log(`link href for ${querySelector}`, linkHtmlElement._attrs.href);
+            const urlExtracted = new URL.URL(linkHtmlElement._attrs.href, req.query.url).href;
+            console.log(`url extracted for ${querySelector}`, urlExtracted);
+            return urlExtracted;
         } catch (error) {
-            console.log("Fail to get atom feed url :(", error);
+            console.log(`"Fail to get ${querySelector} data :(`, error);
+            return null;
         }
     }
 
+    result.faviconUrl = getUrlFromHtml('link[rel="shortcut icon"]');
+    
+    result.rssUrl = getUrlFromHtml('link[type="application/rss+xml"]')
+        || getUrlFromHtml('link[type="application/atom+xml"]');
+    
     if (result.rssUrl) {
         const feedResult = await tryFetchFeedContent(result.rssUrl);
         if (feedResult.success) {
-        result.title = feedResult.content.title;
+            result.title = feedResult.content.title;
         }
     }
 
