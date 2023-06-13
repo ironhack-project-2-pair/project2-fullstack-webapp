@@ -1,11 +1,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+const websiteUrlInput = document.getElementById("websiteUrl");
 document.addEventListener("DOMContentLoaded", () => {
   console.log("project2-fullstack-webapp-feedsreader JS imported successfully!");
-  const websiteUrlInput = document.getElementById("websiteUrl");
   if (websiteUrlInput) {
     console.log("Found websiteUrl input!");
-    websiteUrlInput.addEventListener('change', getWebSiteDetails);
-    websiteUrlInput.addEventListener('paste', getWebSiteDetails);
+    websiteUrlInput.addEventListener('keyup', getWebSiteDetailsWithDebounce);
+    websiteUrlInput.addEventListener('paste', getWebSiteDetailsWithDelay);
   }
 });
 
@@ -20,24 +20,53 @@ function addToReadList(title, url) {
   })
 }
 
+function debounce(func, wait) {
+  let timeout;
+  return () => {
+      if (timeout) {
+          clearTimeout(timeout);
+      }
+      timeout = setTimeout(func, wait)
+  }
+}
 
-async function getWebSiteDetails(event) {
-  let pasteData = (event.clipboardData || window.clipboardData).getData("text");
-  console.log("event", event, pasteData);
-  const response = await fetch("/feeds/details?url=" + pasteData);
-  console.log("result", response);
+const getWebSiteDetailsWithDebounce = debounce(() => {
+  getWebSiteDetails();
+}, 500);
+
+async function getWebSiteDetailsWithDelay(event) {
+  setTimeout(getWebSiteDetails, 0);
+}
+
+async function getWebSiteDetails() {
+  const url = websiteUrlInput.value;
+  const faviconUrlInput = document.getElementById("faviconUrl");
+  faviconUrlInput.value = "";
+  const faviconImg = document.getElementById("faviconImg");
+  faviconImg.value = "";
+  const titleInput = document.getElementById("title");
+  titleInput.value = "";
   const feedUrlInput = document.getElementById("url");
+  feedUrlInput.value = "";
+  
+  console.log("will request feed info for website url", url);
+
+  const response = await fetch("/feeds/details?url=" + url);
+  console.log("result", response);
   
   const data = await response.json();
   console.log("data", data);
   
   feedUrlInput.value = data.rssUrl;
-  const faviconUrlInput = document.getElementById("faviconUrl");
-  faviconUrlInput.value = data.faviconUrl;
-  const faviconImg = document.getElementById("faviconImg");
-  faviconImg.src = data.faviconUrl;
+  
+  if(data.faviconUrl) {
+    faviconUrlInput.value = data.faviconUrl;
+  }
+  else {
+    faviconUrlInput.value = "/images/favicon.ico";
+  }
+  faviconImg.src = faviconUrlInput.value;
 
-  const titleInput = document.getElementById("title");
   titleInput.value = data.title;
 }
 
