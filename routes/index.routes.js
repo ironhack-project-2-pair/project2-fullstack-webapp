@@ -52,6 +52,7 @@ router.get("/", async (req, res, next) => {
               .push(...feedContent.items.map(item => {
                 item.feedTitle = feedContent.title
                 item.feedId = feedContent.id
+                item.faviconUrl = feedContent.faviconUrl
                 return item
               }))
             return feedsContentFlat
