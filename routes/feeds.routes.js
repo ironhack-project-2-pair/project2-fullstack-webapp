@@ -86,7 +86,21 @@ router.get("/details", isLoggedIn, async (req, res) => {
         console.log("rss url", rssUrl);
         result.rssUrl = rssUrl.href;
     } catch (error) {
-        return result;
+        console.log("Fail to get rss feed url :(", error);
+    }
+
+    if (!result.rssUrl) {
+        try {
+            // try to get rss feed url
+            const rssFeed = parsedBody.querySelector('link[type="application/atom+xml"]');
+            console.log("rss", rssFeed);
+            console.log("rss", rssFeed._attrs.href);
+            const rssUrl = new URL.URL(rssFeed._attrs.href, req.query.url);
+            console.log("rss url", rssUrl);
+            result.rssUrl = rssUrl.href;
+        } catch (error) {
+            console.log("Fail to get atom feed url :(", error);
+        }
     }
 
     if (result.rssUrl) {
