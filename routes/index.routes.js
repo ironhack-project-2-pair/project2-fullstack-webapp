@@ -25,7 +25,7 @@ router.get("/", async (req, res, next) => {
         .populate('feeds');
 
       if(currentUser.feeds.length === 0) {
-        res.render("/auth/user-profile");
+        res.redirect("/auth/user-profile");
         return;
       }
       
