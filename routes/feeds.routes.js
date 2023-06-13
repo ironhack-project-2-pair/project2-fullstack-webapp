@@ -87,7 +87,18 @@ router.get("/details", isLoggedIn, async (req, res) => {
     }
 
     result.faviconUrl = getUrlFromHtml('link[rel="shortcut icon"]');
-    
+    if(!result.faviconUrl) {
+        const faviconUrl = new URL.URL("/favicon.ico", req.query.url).href;
+        
+        try {
+            await fetch(faviconUrl, { method: "HEAD" });
+            result.faviconUrl = faviconUrl;
+            console.log("Default favicon found!", faviconUrl);
+        } catch (error) {
+            console.log("Default favicon not available :(", faviconUrl);
+        }
+    }
+  
     result.rssUrl = getUrlFromHtml('link[type="application/rss+xml"]')
         || getUrlFromHtml('link[type="application/atom+xml"]');
     
