@@ -58,6 +58,11 @@ router.post("/edit/:id", isLoggedIn, (req, res) => {
 
 router.post("/delete/:id", isLoggedIn, (req, res) => {
     FeedModel.findByIdAndDelete(req.params.id)
+        .then(feed => {
+            // return UserModel.findByIdAndUpdate(req.session.currentUser._id, {$pullAll: {feeds: [{_id: feed._id}]}}) // ok
+            // return UserModel.findByIdAndUpdate(req.session.currentUser._id, {$pullAll: {feeds: [feed._id]}}) // ok
+            return UserModel.findByIdAndUpdate(req.session.currentUser._id, {$pullAll: {feeds: [feed]}}) // ok
+        })
         .then(() => {
             res.redirect("/auth/user-profile")
         })
