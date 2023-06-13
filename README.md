@@ -20,8 +20,8 @@ RSS Feed
     * bonus: event listener to post setting on checkbox click
 *  [ ] Being able to order feeds
 *  [ ] Preview of posts
-*  [ ] Extract feeds from a web page
-    * Feed favicon
+*  [x] Extract feeds from a web page
+    * [x] Feed favicon
 * See other users feeds and subscribe to it
 * Save posts in a DB
 * Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
