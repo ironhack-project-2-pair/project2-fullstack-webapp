@@ -10,9 +10,16 @@
     
     <div class="settings-feed-reader-group"></div>
         <form method="POST" action="/auth/user-profile/">
-            <label>Feed Reader: Group (true = Group by feed / false = Do not group feeds)</label>
-            <input type="checkbox" name="settingsGroup" {{#if _locals.session.currentUser.settings.group}}checked{{/if}}>
-            <input type="submit">
+            <label>Feed Reader: Group</label>
+            <div>
+                <input type="radio" name="settingsGroup" id="settingsGroupTrue" value="on" {{#if _locals.session.currentUser.settings.group}}checked{{/if}}>
+                <label for="settingsGroupTrue">Group by feed</label>
+            </div>
+            <div>
+                <input type="radio" name="settingsGroup" id="settingsGroupFalse" value="off" {{#unless _locals.session.currentUser.settings.group}}checked{{/unless}}>
+                <label for="settingsGroupFalse">Do not group feeds</label>
+            </div>
+            <button type="submit"> Save Settings </button>
         </form>
     </div>
 
