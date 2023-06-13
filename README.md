@@ -26,7 +26,8 @@ RSS Feed
 * Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 * tags and like feed and search on it
 * read/unread items in feeds (different whether feeds merged or separated)
-* dynamic favicon
+    * bulk based on a specific date
+    * item by item
 
 ## Model
 
