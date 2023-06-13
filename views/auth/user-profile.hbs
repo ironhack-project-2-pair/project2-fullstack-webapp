@@ -2,12 +2,23 @@
 
 <h1>User profile</h1>
 
-<p>Email: <span>{{_locals.session.currentUser.email}}</span></p>
+    <h2>Info</h2>
 
-<a href="/feeds/create">Add Feed</a>
+    <p>Email: <span>{{_locals.session.currentUser.email}}</span></p>
+
+    <h2>Settings</h2>
+    
+    <div class="settings-feed-reader-group"></div>
+        <form method="POST" action="/auth/user-profile/">
+            <label>Feed Reader: Group (true = Group by feed / false = Do not group feeds)</label>
+            <input type="checkbox" name="settingsGroup" {{#if _locals.session.currentUser.settings.group}}checked{{/if}}>
+            <input type="submit">
+        </form>
+    </div>
 
 {{#if feeds}}
     <h2>My Feeds</h2>
+    <a href="/feeds/create">Add Feed</a>
         {{#each feeds}}
             {{#if faviconUrl}}
                 <img src="{{faviconUrl}}" alt="{{title}} favicon">
@@ -20,4 +31,5 @@
         {{/each}}
 {{else}}
     <h2>No Feeds</h2>
+    <a href="/feeds/create">Add Feed</a>
 {{/if}}

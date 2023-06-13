@@ -22,7 +22,13 @@ const userSchema = new Schema({
     feeds: [{
       type: Schema.Types.ObjectId,
       ref: "Feed"
-    }]
+    }], 
+    settings: {
+      group: {
+        type: Boolean,
+        default: true,
+      }
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

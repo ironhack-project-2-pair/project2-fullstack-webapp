@@ -129,6 +129,8 @@ router.post("/login", isLoggedOut, (req, res, next) => {
               .render("auth/login", { errorMessage: "Wrong credentials." });
             return;
           }
+
+          // resave: false,
           
           // Add the user object to the session object
           req.session.currentUser = user.toObject();
@@ -160,7 +162,23 @@ router.get("/user-profile", isLoggedIn, (req, res) => {
     .then(feeds => {
       res.render("auth/user-profile", {feeds: feeds});
     })
-  
+});
+
+// https://github.com/expressjs/session#resave
+// app.use(session({resave: false}))
+// https://github.com/expressjs/session#sessionreloadcallback
+// req.session.reload()
+
+// POST /user-profile
+router.post("/user-profile", isLoggedIn, (req, res) => {
+  User.findByIdAndUpdate(req.session.currentUser._id, {settings: {group: req.body.settingsGroup === "on"}}, {new: true})
+    .then(user => {
+      if (!req.session.currentUser.settings) req.session.currentUser.settings = {}
+      req.session.currentUser.settings.group = (req.body.settingsGroup === "on")
+      res.redirect("/auth/user-profile")
+    })
 });
 
 module.exports = router;
+
+

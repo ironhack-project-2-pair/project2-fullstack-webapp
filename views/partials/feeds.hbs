@@ -1,6 +1,3 @@
-
-{{!-- {{log "feedContent" this}} --}}
-
 {{#each this.feeds}}
     <h2>
         {{#if faviconUrl}}
@@ -13,7 +10,11 @@
                 <span>[{{formatedDate}} | <a onclick="(() => addToReadList('{{title}}','{{id}}'))()" 
                     href="javascript:void(0);" >📑</a>]
                 </span>
-                <span><a href="{{link}}" target="_blank">{{title}}</a></span>
+                <span>
+                        <a href="{{link}}" target="_blank">
+                        {{#unless _locals.session.settings.group}}{{feedTitle}} - {{/unless}}{{title}}
+                    </a>
+                </span>
             </li>
         {{/each}}
         </ul>

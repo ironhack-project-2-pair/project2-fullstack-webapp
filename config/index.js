@@ -55,7 +55,7 @@ module.exports = (app) => {
   app.use(
     session({
       secret: process.env.SESSION_SECRET || "super hyper secret key",
-      resave: false,
+      resave: false, // true to force req.session update at each request even if no change (race conditions where // requests can lead to one being overwritten...)
       saveUninitialized: false,
       store: MongoStore.create({
         mongoUrl: MONGO_URI,

@@ -26,26 +26,41 @@ router.get("/", async (req, res, next) => {
         return;
       }
       
-      const feedsContents = [];
+      const feedsContent = [];
       const feeds = currentUser.feeds;
-      //console.log("feeddd:", feeds);
       const feedsInError = [];
-      for (let i = 0; i < feeds.length; i++) {
-        const feed = feeds[i];
-
-        const result = await tryFetchFeedContent(feed.url);
-        if (result.success) {
-          const feedContent = result.content;
-          feedContent.title = feed.title ?? feedContent.title;
-          feedContent.faviconUrl = feed.faviconUrl;
-          feedsContents.push(feedContent);
-        } else {
-          feedsInError.push(result.error);
+      if (req.session.currentUser.settings.group) {
+        for (let i = 0; i < feeds.length; i++) {
+          const feed = feeds[i];
+          const result = await tryFetchFeedContent(feed.url);
+          if (result.success) {
+            const feedContent = result.content;
+            feedContent.title = feed.title ?? feedContent.title;
+            feedContent.faviconUrl = feed.faviconUrl;
+            feedsContent.push(feedContent);
+          } else {
+            feedsInError.push(result.error);
+          }
         }
+      } else {
+        const feedsItemsAll = []
+        for (let i = 0; i < feeds.length; i++) {
+          const feed = feeds[i];
+          const result = await tryFetchFeedContent(feed.url);
+          if (result.success) {
+            feedsItemsAll.push(...result.content.items.map(item => {
+              item.feedTitle = feed.title
+              // item.feedTitle = result.title
+              return item
+            }));
+          } else {
+            feedsInError.push(result.error);
+          }
+        }
+        feedsContent.push({title: "All feeds items", items: feedsItemsAll});
       }
 
-      // console.log("feeds", feedContent);
-      res.render("index", { feeds : feedsContents, feedsInError });
+      res.render("index", { feeds : feedsContent, feedsInError });
 
   } catch (error) {
     console.log('error', error);
