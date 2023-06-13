@@ -59,12 +59,19 @@ router.post("/edit/:id", isLoggedIn, (req, res) => {
 
 router.get("/details", isLoggedIn, async (req, res) => {
     const result = {};
-    console.log("url", req.query.url);
-    const response = await fetch(req.query.url);
-    const body = await response.text();
-    // console.log("body", body);
-    const parsedBody = HTMLParser.parse(body);
-    console.log("parse", parsedBody);
+    let parsedBody
+    try {
+        console.log("url", req.query.url);
+        const response = await fetch(req.query.url);
+        const body = await response.text();
+        // console.log("body", body);
+        parsedBody = HTMLParser.parse(body);
+        // console.log("parse", parsedBody);
+    } catch (error) {
+        console.log("Fail to reach website or parse content :(", error);
+        res.json(result);
+        return;
+    }
 
     try {
         //Try to get favicon

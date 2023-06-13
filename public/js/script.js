@@ -57,6 +57,11 @@ async function getWebSiteDetails() {
   const data = await response.json();
   console.log("data", data);
   
+  if(!data.rssUrl) {
+    titleInput.value = "<No data found>";
+    return;
+  }
+
   feedUrlInput.value = data.rssUrl;
   
   if(data.faviconUrl) {
