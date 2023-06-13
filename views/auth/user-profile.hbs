@@ -19,16 +19,21 @@
 {{#if feeds}}
     <h2>My Feeds</h2>
     <a href="/feeds/create">Add a new Feed</a>
+
+    <div id="user-feed-list">
         {{#each feeds}}
-            {{#if faviconUrl}}
-                <img src="{{faviconUrl}}" alt="{{title}} favicon">
-            {{/if}}
-            <span>{{title}} - {{url}}</span>
-            <a href="/feeds/edit/{{_id}}">Edit</a>
-            <form method ="POST" action="/feeds/delete/{{_id}}">
-                <button type="submit"> Delete </button>
-            </form>
+            <div>
+                {{#if faviconUrl}}
+                    <img src="{{faviconUrl}}" alt="{{title}} favicon">
+                {{/if}}
+                <span>{{title}} - {{url}}</span>
+                <a href="/feeds/edit/{{_id}}">Edit</a>
+                <form method ="POST" action="/feeds/delete/{{_id}}">
+                    <button class="link" type="submit"> Delete </button>
+                </form>
+            </div>
         {{/each}}
+    </div>
 {{else}}
     <h2>No Feeds</h2>
     <a href="/feeds/create">Add Feed</a>

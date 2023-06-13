@@ -10,3 +10,30 @@ a {
 h1 {
   color: 15px;
 }
+
+img {
+  height: 32px;
+}
+
+button.link {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #00b7ff;
+  /* text-decoration: underline; */
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+button.link:hover {
+  text-decoration: underline;
+}
+
+#user-feed-list form {
+  display: inline-block;
+  margin: 0px;
+}
