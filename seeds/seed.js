@@ -4,14 +4,14 @@ const User = require('../models/User.model');
 
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/project2-fullstack-webapp-feedsreader';
 
-
+// RSS 0.91 or RSS 2.0 or ATOM
 const feeds = [
     { url: 'https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest' },
     { url: 'http://xkcd.com/atom.xml' },
     { url: 'https://www.lemonde.fr/rss/une.xml' },
     { url: 'https://dwh.lequipe.fr/api/edito/rss?path=/' },
     { url: 'https://www.zdnet.fr/feeds/rss/actualites/' },
-    // { url: 'http://rss.slashdot.org/Slashdot/slashdot' },
+    { url: 'http://rss.slashdot.org/Slashdot/slashdot' }, // RSS 1.0 aka RDF does not work with rss-to-json package but ok with rss-parser package
     { url: 'https://www.youtube.com/feeds/videos.xml?user=ScienceEtonnante' },
     { url: 'https://cprss.s3.amazonaws.com/javascriptweekly.com.xml' },
 ];
@@ -24,13 +24,13 @@ mongoose
 
     return Feed.deleteMany({}); //WARNING: this will delete all books in your DB !!
   })
-  .then( (response) => {
-    console.log(response);
+  .then((response) => {
+    // console.log(response);
     return User.findOne()
   })
   .then(user => {
     firstUser = user;
-    console.log("Found user", firstUser);
+    // console.log("Found user", firstUser);
     return Feed.insertMany(feeds);
   })
   .then(feedsFromDB => {
