@@ -6,19 +6,20 @@ RSS Feed
 
 ### Must
 
-* User account
-* CRUD on user's feeds
-* Display of posts of feeds Ordered by date (Display: title & date)
-* Support Atom (atom: youtube, lemonde) https://www.npmjs.com/package/rss-to-json
+* [x] User account
+* [ ] CRUD on user's feeds
+* [x] Display of content of feeds by feeds
+* [x] Support Atom (atom: youtube, lemonde) https://www.npmjs.com/package/rss-to-json
 
 ### Nice
 
-* Rss http://rss.slashdot.org/Slashdot/slashdot
-* Reading list
-* Display of content of feeds by feeds
-* Being able to order feeds
-* Preview of posts
-* Extract feeds from a web page
+
+*  [x] Rss http://rss.slashdot.org/Slashdot/slashdot
+*  [x] Reading list
+*  [ ] Display of posts of feeds Ordered by date (Display: title & date)
+*  [ ] Being able to order feeds
+*  [ ] Preview of posts
+*  [ ] Extract feeds from a web page
     * Feed favicon
 * See other users feeds and subscribe to it
 * Save posts in a DB
