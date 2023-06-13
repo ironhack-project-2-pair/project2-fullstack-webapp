@@ -17,6 +17,7 @@ RSS Feed
 *  [x] Rss http://rss.slashdot.org/Slashdot/slashdot
 *  [x] Reading list
 *  [ ] Display of posts of feeds Ordered by date (Display: title & date)
+    * bonus: event listener to post setting on checkbox click
 *  [ ] Being able to order feeds
 *  [ ] Preview of posts
 *  [ ] Extract feeds from a web page
@@ -28,6 +29,7 @@ RSS Feed
 * read/unread items in feeds (different whether feeds merged or separated)
     * bulk based on a specific date
     * item by item
+* upload favicon
 
 ## Model
 
