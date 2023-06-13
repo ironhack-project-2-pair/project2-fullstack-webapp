@@ -27,6 +27,11 @@ const userSchema = new Schema({
       group: {
         type: Boolean,
         default: true,
+      },
+      order: {
+        type: Number,
+        default: 1, // ascending
+        enum: [1, -1]
       }
     }
   },

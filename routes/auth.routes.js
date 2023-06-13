@@ -171,10 +171,23 @@ router.get("/user-profile", isLoggedIn, (req, res) => {
 
 // POST /user-profile
 router.post("/user-profile", isLoggedIn, (req, res) => {
-  User.findByIdAndUpdate(req.session.currentUser._id, {settings: {group: req.body.settingsGroup === "on"}}, {new: true})
+  console.log(req.body)
+  User.findByIdAndUpdate(req.session.currentUser._id, 
+    {settings: 
+      {
+        group: req.body.settingsGroup === "on", 
+        order: +req.body.settingsOrder // value is converted to string
+      }
+    }, {new: true}
+  )
     .then(user => {
+      // update req.session so that the session store is also update at the end of the cycle
       if (!req.session.currentUser.settings) req.session.currentUser.settings = {}
-      req.session.currentUser.settings.group = (req.body.settingsGroup === "on")
+      req.session.currentUser.settings = 
+        {
+          group: (req.body.settingsGroup === "on"),
+          order: +req.body.settingsOrder
+        }
       res.redirect("/auth/user-profile")
     })
 });

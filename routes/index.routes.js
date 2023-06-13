@@ -59,7 +59,7 @@ router.get("/", async (req, res, next) => {
           }, [])
 
         // sort by date descending
-        feedsItemsAll.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
+        feedsItemsAll.sort((a, b) => (new Date(a.isoDate) - new Date(b.isoDate)) * req.session.currentUser.settings.order)
 
         // clear feedsContent
         // feedsContent.splice(0, feedsContent.length)
@@ -68,6 +68,7 @@ router.get("/", async (req, res, next) => {
       }
 
       res.render("index", { feeds : feedsContent, feedsInError });
+      // res.render("index", { foo: "bar" });
 
   } catch (error) {
     console.log('error', error);
