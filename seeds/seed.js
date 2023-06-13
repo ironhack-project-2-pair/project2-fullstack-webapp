@@ -4,7 +4,7 @@ const User = require('../models/User.model');
 
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/project2-fullstack-webapp-feedsreader';
 
-// RSS 0.91 or RSS 2.0 or ATOM
+// RSS 0.91 or RSS 2.0 or ATOM or RSS 1.0 aka RDF
 const feeds = [
   {
     "url": "https://stackoverflow.com/feeds/tag?tagnames=javascript&sort=newest",
@@ -26,7 +26,10 @@ const feeds = [
     "title": "L'équipe",
     "faviconUrl": "https://www.lequipe.fr/img/favicons/manifest-48x48.png"
   },
-  { url: 'https://www.zdnet.fr/feeds/rss/actualites/' },
+  { url: 'https://www.zdnet.fr/feeds/rss/actualites/',
+    title: "L'équipe",
+    // faviconUrl: ""
+  },
   {
     "url": "https://rss.slashdot.org/Slashdot/slashdotMain",
     "title": "Slashdot",

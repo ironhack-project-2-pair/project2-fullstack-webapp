@@ -29,34 +29,40 @@ router.get("/", async (req, res, next) => {
       const feedsContent = [];
       const feeds = currentUser.feeds;
       const feedsInError = [];
-      if (req.session.currentUser.settings.group) {
-        for (let i = 0; i < feeds.length; i++) {
-          const feed = feeds[i];
-          const result = await tryFetchFeedContent(feed.url);
-          if (result.success) {
-            const feedContent = result.content;
-            feedContent.title = feed.title ?? feedContent.title;
-            feedContent.faviconUrl = feed.faviconUrl;
-            feedsContent.push(feedContent);
-          } else {
-            feedsInError.push(result.error);
-          }
+      for (let i = 0; i < feeds.length; i++) {
+        const feed = feeds[i];
+        const result = await tryFetchFeedContent(feed.url);
+        if (result.success) {
+          const feedContent = result.content;
+          feedContent.title = feed.title ?? feedContent.title;
+          feedContent.faviconUrl = feed.faviconUrl;
+          feedContent.id = feed._id;
+          feedsContent.push(feedContent);
+        } else {
+          feedsInError.push(result.error);
         }
-      } else {
-        const feedsItemsAll = []
-        for (let i = 0; i < feeds.length; i++) {
-          const feed = feeds[i];
-          const result = await tryFetchFeedContent(feed.url);
-          if (result.success) {
-            feedsItemsAll.push(...result.content.items.map(item => {
-              item.feedTitle = feed.title
-              // item.feedTitle = result.title
-              return item
-            }));
-          } else {
-            feedsInError.push(result.error);
-          }
-        }
+      }
+
+      if (!req.session.currentUser.settings.group) {
+        // make a flat array containing all feeds items and add the source feed title to each item
+        const feedsItemsAll = 
+        feedsContent
+          .reduce((feedsContentFlat, feedContent) => {
+            feedsContentFlat
+              .push(...feedContent.items.map(item => {
+                item.feedTitle = feedContent.title
+                item.feedId = feedContent.id
+                return item
+              }))
+            return feedsContentFlat
+          }, [])
+
+        // sort by date descending
+        feedsItemsAll.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
+
+        // clear feedsContent
+        // feedsContent.splice(0, feedsContent.length)
+        feedsContent.length = 0
         feedsContent.push({title: "All feeds items", items: feedsItemsAll});
       }
 

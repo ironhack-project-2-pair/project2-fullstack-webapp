@@ -1,3 +1,4 @@
+// const { parse } = require('rss-to-json'); // does not work with RSS 1.0 aka RDF
 const Parser = require('rss-parser');
 const parser = new Parser();
 const formatDate = require('../utils/formatDate');
@@ -12,8 +13,6 @@ const tryFetchFeedContent = async (url) => {
         const content = await parser.parseURL(url);
         // pubDate: '2023-06-12T00:00:00.000Z' --> ticks (.NET framework 100 nanoseconds since January 1, 0001, at 00:00:00 UTC) 638221248000000000 --> unix timestamp in milliseconds 1686520800000 (since 01/01/1970)
         // isoDate: '2023-06-12T00:00:00.000Z'
-
-        //content.items.sort((a, b) => a - b);
         
         const now = new Date();
 
