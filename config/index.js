@@ -54,7 +54,7 @@ module.exports = (app) => {
   // ℹ️ Middleware that adds a "req.session" information and later to check that you are who you say you are 😅
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || "super hyper secret key",
+      secret: process.env.SESSION_SECRET,
       resave: false, // true to force req.session update at each request even if no change (race conditions where // requests can lead to one being overwritten...)
       saveUninitialized: false,
       store: MongoStore.create({
