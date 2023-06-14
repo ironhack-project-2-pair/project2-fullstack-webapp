@@ -11,24 +11,20 @@
     <div class="settings-feed-reader-group"></div>
         <form method="POST" action="/auth/user-profile/">
 
-            <label>Feed Reader: Group</label>
             <div>
+                <span>Display Mode:</span>
                 <input type="radio" name="settingsGroup" id="settingsGroupTrue" value="on" {{#if _locals.session.currentUser.settings.group}}checked{{/if}}>
-                <label for="settingsGroupTrue">Group by feed</label>
-            </div>
-            <div>
+                <label for="settingsGroupTrue">Grouped by feeds</label>
                 <input type="radio" name="settingsGroup" id="settingsGroupFalse" value="off" {{#unless _locals.session.currentUser.settings.group}}checked{{/unless}}>
-                <label for="settingsGroupFalse">Do not group feeds</label>
+                <label for="settingsGroupFalse">All in one feed</label>
             </div>
 
-            <label>Feed Reader: Order</label>
             <div>
+                <span>Display Order:</span>
                 <input type="radio" name="settingsOrder" id="settingsOrderAsc" value=1 {{#if (eqStrict _locals.session.currentUser.settings.order 1)}}checked{{/if}}>
-                <label for="settingsOrderAsc">Dates ascending</label>
-            </div>
-            <div>
+                <label for="settingsOrderAsc">Oldest first</label>
                 <input type="radio" name="settingsOrder" id="settingsOrderDesc" value=-1 {{#if (eqStrict _locals.session.currentUser.settings.order -1)}}checked{{/if}}>
-                <label for="settingsOrderDesc">Dates Descending</label>
+                <label for="settingsOrderDesc">Newest first</label>
             </div>
 
             <button type="submit"> Save Settings </button>
