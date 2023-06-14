@@ -22,7 +22,12 @@ const userSchema = new Schema({
     feeds: [{
       type: Schema.Types.ObjectId,
       ref: "Feed"
-    }], 
+    }],
+    feedReadDates: {
+      type: Map,
+      of: Schema.Types.Date,
+      default: {}
+    }, 
     settings: {
       group: {
         type: Boolean,
