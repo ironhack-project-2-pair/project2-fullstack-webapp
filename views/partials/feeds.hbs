@@ -8,19 +8,24 @@
         <ul>
         {{#each items}}
             <li>
-                <span>[{{formatedDate}} | <a onclick="(() => addToReadList('{{title}}','{{id}}'))()" 
-                    href="javascript:void(0);" >📑</a>]
+                <span>[
+                    <a onclick="(() => patchFeedReadDate('{{feedId}}','{{isoDate}}'))()" 
+                    href="javascript:void(0);">
+                        {{formatedDate}}</a>
+                     | 
+                    <a onclick="(() => addToReadList('{{title}}','{{id}}'))()" 
+                    href="javascript:void(0);" >
+                        📑</a> ]
                 </span>
                 <span>
-                        <a href="{{link}}" target="_blank">
-                            {{#if faviconUrl}}
-                                <img src="{{faviconUrl}}" alt="{{title}} favicon">
-                            {{/if}}
-                            {{!-- use path segment to reference the parent template scope --}}
-                            {{!-- {{#unless ../../_locals.session.currentUser.settings.group}}{{feedTitle}} - {{/unless}}{{title}} --}}
-                            {{!-- ot use absolute path --}}
-                            {{title}}
-                    </a>
+                    <a href="{{link}}" target="_blank">
+                        {{#if faviconUrl}}
+                            <img src="{{faviconUrl}}" alt="{{title}} favicon">
+                        {{/if}}
+                        {{!-- use path segment to reference the parent template scope --}}
+                        {{!-- {{#unless ../../_locals.session.currentUser.settings.group}}{{feedTitle}} - {{/unless}}{{title}} --}}
+                        {{!-- ot use absolute path --}}
+                        {{title}}</a>
                     <span class="feed-name">
                         {{#unless @root._locals.session.currentUser.settings.group}}
                             - {{feedTitle}}
