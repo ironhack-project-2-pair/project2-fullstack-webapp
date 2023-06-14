@@ -28,6 +28,7 @@ RSS Feed
 * [ ] See all feeds in DB
     * [ ] and be able to subscribe to it
     * [ ] filtered by users
+    * [ ] only creator of feed can delete/update it (add isOwner middleware)
 * [ ] Save posts in a DB
 * [ ] Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 * [ ] tags and like feed and search on it
