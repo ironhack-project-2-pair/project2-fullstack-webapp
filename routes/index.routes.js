@@ -34,9 +34,13 @@ router.get("/", async (req, res, next) => {
         const result = await tryFetchFeedContent(feed.url);
         if (result.success) {
           const feedContent = result.content;
+          // add new properties to feed's data
           feedContent.title = feed.title ?? feedContent.title;
           feedContent.faviconUrl = feed.faviconUrl;
           feedContent.id = feed._id;
+          // sort by date ascending (oldest first) / descending (newest first)
+          feedContent.items.sort((a, b) => (new Date(a.isoDate) - new Date(b.isoDate)) * req.session.currentUser.settings.order)
+          // filter items by feed read date
           if (currentUser.feedReadDates) {
             const readDate = currentUser.feedReadDates.get(feed._id);
             if(readDate) {
@@ -65,7 +69,7 @@ router.get("/", async (req, res, next) => {
             return feedsContentFlat
           }, [])
 
-        // sort by date descending
+        // sort by date ascending (oldest first) / descending (newest first)
         feedsItemsAll.sort((a, b) => (new Date(a.isoDate) - new Date(b.isoDate)) * req.session.currentUser.settings.order)
 
         // clear feedsContent
