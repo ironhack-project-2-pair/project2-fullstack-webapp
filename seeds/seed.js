@@ -27,7 +27,7 @@ const feeds = [
     "faviconUrl": "https://www.lequipe.fr/img/favicons/manifest-48x48.png"
   },
   { url: 'https://www.zdnet.fr/feeds/rss/actualites/',
-    title: "L'équipe",
+    title: "ZDNet.fr: Business et Solutions IT - Toute l'actualité de l'internet et du marché IT.",
     // faviconUrl: ""
   },
   {

@@ -68,7 +68,6 @@ router.get("/", async (req, res, next) => {
       }
 
       res.render("index", { feeds : feedsContent, feedsInError });
-      // res.render("index", { foo: "bar" });
 
   } catch (error) {
     console.log('error', error);

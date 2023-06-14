@@ -18,7 +18,7 @@ RSS Feed
 * [x] Reading list
 * [x] Extract feeds from a web page
     * [x] Feed favicon
-* [ ] Display of posts of feeds Ordered by date (Display: title & date)
+* [x] Display of posts of feeds Ordered by date (Display: title & date)
     * [ ] bonus: event listener to post setting on checkbox click
 * [ ] read/unread items in feeds (different whether feeds merged or separated)
     * [ ] bulk based on a specific date
@@ -32,6 +32,7 @@ RSS Feed
 * [ ] Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 * [ ] tags and like feed and search on it
 * [ ] upload favicon
+* [ ] limit items by feed in group (only most recents no matter the order)
 
 
 ## Model
