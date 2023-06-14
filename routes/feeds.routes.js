@@ -14,18 +14,27 @@ const URL = require("node:url")
 
 
 router.patch("/read-date", isLoggedIn, (req, res) => {
-    let user;
     UserModel.findById(req.session.currentUser._id)
         .then( user => {
             if (!user.feedReadDates) {
                 user.feedReadDates = new Map();
             }
 
-            user.feedReadDates.set(req.body.feedId, new Date(req.body.isoDate));
-            console.log("user.feedReadDates", user.feedReadDates);
+            const readDate = new Date(req.body.isoDate);
+            user.feedReadDates.set(req.body.feedId, readDate);
+            if (!req.session.currentUser.settings.group) {
+                //For all users feed, set the date received
+                user.feeds.forEach(key => {
+                    const currentDate = user.feedReadDates.get(key);
+                    if(!currentDate || readDate > user.feedReadDates.get(key)) {
+                        user.feedReadDates.set(key, readDate);
+                    }
+                });
+            }
+
             return UserModel.findByIdAndUpdate(user._id, user)
         })
-        .then(o => {
+        .then(_ => {
             res.status(200);
         })
         .catch(e => res.status(500).json({ error : e }))
