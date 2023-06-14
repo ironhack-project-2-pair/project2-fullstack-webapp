@@ -19,11 +19,13 @@
                             {{!-- use path segment to reference the parent template scope --}}
                             {{!-- {{#unless ../../_locals.session.currentUser.settings.group}}{{feedTitle}} - {{/unless}}{{title}} --}}
                             {{!-- ot use absolute path --}}
-                            {{#unless @root._locals.session.currentUser.settings.group}}
-                                {{feedTitle}} - 
-                            {{/unless}}
                             {{title}}
                     </a>
+                    <span class="feed-name">
+                        {{#unless @root._locals.session.currentUser.settings.group}}
+                            - {{feedTitle}}
+                        {{/unless}}
+                    </span>
                 </span>
             </li>
         {{/each}}
