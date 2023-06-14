@@ -17,7 +17,10 @@ const tryFetchFeedContent = async (url) => {
         const now = new Date();
 
         // content.items.forEach(i => i.formatedDate = formatDate(new Date(i.created), now))
-        content.items.forEach(i => i.formatedDate = formatDate(new Date(i.isoDate), now))
+        content.items.forEach(i => {
+          i.postDate = new Date(i.isoDate);
+          i.formatedDate = formatDate(i.postDate, now);
+        })
 
         // Handle specific case (only StackOverflow at the moment) where title is not a string
         if (typeof content.title === "object") {
