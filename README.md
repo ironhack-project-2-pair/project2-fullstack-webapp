@@ -1,6 +1,5 @@
-# project2-fullstack-webapp
-
-RSS Feed
+# project2-fullstack-webapp-feedsreader
+# RSS Feeds Reader
 
 ## MVP
 
@@ -41,7 +40,6 @@ RSS Feed
 * [ ] Save older items in a DB if not in feed's item anymore
 * [ ] Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 
-
 ## Model
 
 * User
@@ -55,6 +53,6 @@ RSS Feed
     * url favicon : Binary / String
     * tags [string]
 
-(* Posts)
+(* Item)
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
