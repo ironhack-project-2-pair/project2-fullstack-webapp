@@ -13,27 +13,33 @@ RSS Feed
 
 ### Nice
 
-
-* [x] Rss http://rss.slashdot.org/Slashdot/slashdot
+* [ ] styles with Tailwind
+* [x] fix RSS 1.0 aka RDF, example: http://rss.slashdot.org/Slashdot/slashdot
 * [x] Reading list
-* [x] Extract feeds from a web page
-    * [x] Feed favicon
-* [x] Display of posts of feeds Ordered by date (Display: title & date)
-    * [ ] bonus: event listener to post setting on checkbox click
-* [ ] read/unread items in feeds (different whether feeds merged or separated)
-    * [ ] bulk based on a specific date
-    * [ ] item by item
-* [ ] Preview of posts
-* [ ] Being able to order feeds
-* [ ] See all feeds in DB
-    * [ ] and be able to subscribe to it
-    * [ ] filtered by users
+    * [x] READ items (list articles)
+    * [x] CREATE items (add article)
+    * [ ] DELETE items (clear all articles)
+* [x] Feeds CREATE --> Extract feeds from a web page source HTML code
+    * [x] Extract feed favicon
+    * [x] Extract feed title
+    * [x] Upload favicon
+* [x] Feeds READ --> Display of items of feeds ordered by date via a User setting
+    * [ ] extra: add event listener to post setting on checkbox click
+* [x] Feeds READ --> Display of items grouped by feeds or not via a User setting
+    * [ ] extra: add event listener to post setting on checkbox click
+* [x] Feeds READ --> Filter out items based a read date (via click on date Feeds Reader)
+    * [x] when grouped by feeds --> read date applies only the feed's items
+    * [x] when not grouped --> read date applies to all feeds' items
+    * [ ] when grouped by feeds or not --> fix number of items in feed in title
+    * [ ] when grouped by feeds or not --> remove or hide items filtered out
+* [ ] Limit items by feeds when grouped (only most recents no matter the order)
+* [ ] Explore all feeds in DB, not only the ones of the user
+    * [ ] Subscribe to a feed (add it to current user)
+    * [ ] Filter feeds by user, likes, tags, etc.
     * [ ] only creator of feed can delete/update it (add isOwner middleware)
-* [ ] Save posts in a DB
+* [ ] Preview of posts
+* [ ] Save older items in a DB if not in feed's item anymore
 * [ ] Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
-* [ ] tags and like feed and search on it
-* [ ] upload favicon
-* [ ] limit items by feed in group (only most recents no matter the order)
 
 
 ## Model
