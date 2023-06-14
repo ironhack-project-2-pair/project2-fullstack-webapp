@@ -20,6 +20,17 @@ function addToReadList(title, url) {
   })
 }
 
+function patchFeedReadDate(feedId, isoDate) {
+  console.log("Will save date for feed", { feedId, isoDate });
+  fetch("/feeds/read-date", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ feedId, isoDate })
+  })
+}
+
 function debounce(func, wait) {
   let timeout;
   return () => {

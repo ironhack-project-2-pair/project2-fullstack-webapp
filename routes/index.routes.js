@@ -37,6 +37,13 @@ router.get("/", async (req, res, next) => {
           feedContent.title = feed.title ?? feedContent.title;
           feedContent.faviconUrl = feed.faviconUrl;
           feedContent.id = feed._id;
+          if (currentUser.feedReadDates) {
+            const readDate = currentUser.feedReadDates.get(feed._id);
+            if(readDate) {
+              const date = new Date(readDate);
+              feedContent.items = feedContent.items.filter(i => i.postDate > date);
+            }
+          }
           feedsContent.push(feedContent);
         } else {
           feedsInError.push(result.error);
@@ -68,7 +75,6 @@ router.get("/", async (req, res, next) => {
       }
 
       res.render("index", { feeds : feedsContent, feedsInError });
-      // res.render("index", { foo: "bar" });
 
   } catch (error) {
     console.log('error', error);

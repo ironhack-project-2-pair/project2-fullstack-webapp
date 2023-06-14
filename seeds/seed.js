@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Feed = require('../models/Feed.model');
 const User = require('../models/User.model');
 
+require('dotenv').config(); // load environment variables from .env file
+
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/project2-fullstack-webapp-feedsreader';
 
 // RSS 0.91 or RSS 2.0 or ATOM or RSS 1.0 aka RDF
@@ -27,7 +29,7 @@ const feeds = [
     "faviconUrl": "https://www.lequipe.fr/img/favicons/manifest-48x48.png"
   },
   { url: 'https://www.zdnet.fr/feeds/rss/actualites/',
-    title: "L'équipe",
+    title: "ZDNet.fr: Business et Solutions IT - Toute l'actualité de l'internet et du marché IT.",
     // faviconUrl: ""
   },
   {

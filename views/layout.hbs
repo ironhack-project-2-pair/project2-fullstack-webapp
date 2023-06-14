@@ -12,24 +12,6 @@
 
   <body>
 
-    {{!-- {{#noop}}{{{body}}}{{/noop}} --}}
-    {{!-- 
-    helpers takes precedence over fields defined in the context,
-    so if there is a noop field in the current context (this), it will be masked by the helper; 
-    use a path reference to reference it on the context object:
-    {{./noop}}
-    --}}
-    {{!-- {{#noop}}{{foo}}{{/noop}} --}}
-    {{!--
-    {{#ifAreEqual 1 1}}equal{{else}}different{{/ifAreEqual}}
-    {{#ifAreEqual 1 0}}equal{{else}}different{{/ifAreEqual}}
-    --}}
-    {{!--
-    {{#if (eqStrict 1 1)}}equal{{else}}different{{/if}}
-    {{#if (eqStrict 1 O)}}equal{{else}}different{{/if}}
-    {{#if (eqLoose 1 "1")}}equal{{else}}different{{/if}}
-    --}}
-
     {{{body}}}
 
     <script src="/js/script.js"></script>

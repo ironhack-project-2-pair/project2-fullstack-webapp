@@ -12,6 +12,26 @@ const tryFetchFeedContent = require("../utils/fetchFeed")
 const HTMLParser = require("node-html-parser")
 const URL = require("node:url")
 
+
+router.patch("/read-date", isLoggedIn, (req, res) => {
+    let user;
+    UserModel.findById(req.session.currentUser._id)
+        .then( user => {
+            if (!user.feedReadDates) {
+                user.feedReadDates = new Map();
+            }
+
+            user.feedReadDates.set(req.body.feedId, new Date(req.body.isoDate));
+            console.log("user.feedReadDates", user.feedReadDates);
+            return UserModel.findByIdAndUpdate(user._id, user)
+        })
+        .then(o => {
+            res.status(200);
+        })
+        .catch(e => res.status(500).json({ error : e }))
+})
+
+
 /**********/
 /* CREATE */
 /**********/
