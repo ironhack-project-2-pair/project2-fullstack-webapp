@@ -8,7 +8,7 @@
             {{#if faviconUrl}}
                 <img src="{{faviconUrl}}" alt="{{title}} favicon">
             {{/if}}
-            {{title}} ({{items.length}})
+            {{title}} (<span>{{items.length}}</span>)
         </h2>
         <ul>
         {{#each items}}
@@ -19,7 +19,7 @@
                         {{formatedDate}}</a>
                      | 
                     <a onclick="(() => addToReadList('{{title}}','{{link}}', '{{../id}}'))()" 
-                    href="javascript:void(0);" title="Add to the reading list" >
+                    href="javascript:void(0);" title="Add to the reading list">
                         📑</a> ]
                 </span>
                 <span>

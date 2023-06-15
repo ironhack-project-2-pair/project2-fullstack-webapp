@@ -44,7 +44,6 @@ function patchFeedReadDate(feedId, isoDate, itemIndex) {
       } else {
         div = document.getElementById("all-feeds-items");
       }
-      console.log(div);
       
       const liHtmlCollection = div.getElementsByTagName("li");
       if (data.order === 1) { // ascending / oldest first
@@ -56,7 +55,8 @@ function patchFeedReadDate(feedId, isoDate, itemIndex) {
           .filter(liDomElement => liDomElement.dataset.index >= +itemIndex)
           .forEach(liDomElement => liDomElement.remove());
       }
-
+      const lengthAfter = div.getElementsByTagName("li").length;
+      div.getElementsByTagName("h2").item(0).getElementsByTagName("span").item(0).innerText = lengthAfter.toString()
     })
     .catch(error => {
       console.error(error);
