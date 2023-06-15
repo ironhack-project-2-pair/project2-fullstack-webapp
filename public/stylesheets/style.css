@@ -128,6 +128,9 @@ h2>img {
   padding: 10px;
 }
 
+#settings-feed-reader-group * {
+  font-size: var(--text-size);
+}
 
 .feed-config {
   margin: 20px;
