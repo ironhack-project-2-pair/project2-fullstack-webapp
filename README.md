@@ -1,5 +1,6 @@
 # project2-fullstack-webapp-feedsreader
 # RSS Feeds Reader
+Just a live reader, not a fully-fledged aggregator! (but partially via a reading list)
 
 ## MVP
 
@@ -32,15 +33,15 @@
 * [x] Feeds READ --> Filter out items based a read date (via click on date Feeds Reader)
     * [x] when grouped by feeds --> read date applies only the feed's items
     * [x] when not grouped --> read date applies to all feeds' items
-    * [ ] when grouped by feeds or not --> fix number of items in feed in title
     * [ ] when grouped by feeds or not --> remove or hide items filtered out
+    * [ ] when grouped by feeds or not --> fix number of items in feed in title
 * [ ] Limit items by feeds when grouped (only most recents no matter the order)
 * [ ] Explore all feeds in DB, not only the ones of the user
     * [ ] Subscribe to a feed (add it to current user)
     * [ ] Filter feeds by user, likes, tags, etc.
     * [ ] only creator of feed can delete/update it (add isOwner middleware)
 * [ ] Preview of posts
-* [ ] Save older items in a DB if not in feed's item anymore
+* [ ] Save older items in a DB if not in feed's item anymore (hourly? daily? user setting?)
 * [ ] Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 * [ ] Open youtube links on [Invidious](https://docs.invidious.io/instances/)
 * [ ] Being able to see (again) all the items of a feed
