@@ -42,6 +42,13 @@ router.get("/", async (req, res, next) => {
           feedContent.items.forEach(item => {
             item.feedId = feed._id
           })
+
+          if(feed.url.indexOf("www.youtube.com") !== -1) {
+            feedContent.items.forEach(a => {
+              a.invidiousLink = a.link.replace('www.youtube.com', 'yewtu.be');
+            });
+          }
+
           // sort by date ascending (oldest first) / descending (newest first)
           feedContent.items.sort((a, b) => (new Date(a.isoDate) - new Date(b.isoDate)) * req.session.currentUser.settings.order)
           // filter items by feed read date

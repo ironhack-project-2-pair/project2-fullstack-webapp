@@ -30,7 +30,12 @@
                         {{!-- {{#unless ../../_locals.session.currentUser.settings.group}}{{feedTitle}} - {{/unless}}{{title}} --}}
                         {{!-- ot use absolute path --}}
                         {{title}}</a>
-                    <span class="feed-name">
+                        {{#if invidiousLink}}
+                            <a href="{{invidiousLink}}" target="_blank" title="Watch on Invidious (privacy friendly!)">
+                                <img src="/images/invidious.png" alt="{{title}} on invidious">
+                            </a>
+                        {{/if}}
+                        <span class="feed-name">
                         {{#unless @root._locals.session.currentUser.settings.group}}
                             - {{feedTitle}}
                         {{/unless}}
