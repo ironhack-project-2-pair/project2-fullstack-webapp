@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function addToReadList(title, url) {
+function addToReadList(title, url, feed) {
   console.log("Will add to reading list", { title, url });
   fetch("/reading-list/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, url })
+    body: JSON.stringify({ title, url, feed })
   })
 }
 

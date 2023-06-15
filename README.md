@@ -21,7 +21,7 @@ Just a live reader, not a fully-fledged aggregator! (but partially via a reading
     * [ ] DELETE items (clear all articles)
     * [ ] Check to not introduce double
     * [ ] Remove on opening (?)
-    * [ ] Favicon / feed name
+    * [x] Favicon / feed name
 * [x] Feeds CREATE --> Extract feeds from a web page source HTML code
     * [x] Extract feed favicon
     * [x] Extract feed title

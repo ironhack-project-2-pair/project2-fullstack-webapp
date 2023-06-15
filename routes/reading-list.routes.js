@@ -11,7 +11,9 @@ const ReadingList = require("../models/ReadingList.model")
 /********/
 
 router.get("/", isLoggedIn, async (req, res) => {
-    const readingList = await ReadingList.findOne({userId: req.session.currentUser._id});
+    const readingList = await ReadingList.findOne({userId: req.session.currentUser._id})
+        .populate("links.feed");
+    //console.log("reading list:", readingList.links);
     res.render('readingList/all', { links: readingList.links });
 })
 

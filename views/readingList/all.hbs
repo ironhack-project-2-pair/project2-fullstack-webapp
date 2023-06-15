@@ -6,7 +6,11 @@
 <ul>
 {{#each this.links}}
     <li>
-        <span><a href="{{url}}" target="_blank">{{title}}</a></span>
+        <span>
+            {{#if feed.faviconUrl}}
+                <img src="{{feed.faviconUrl}}" alt="{{title}} favicon">
+            {{/if}}
+    <a href="{{url}}" target="_blank">{{title}}</a> - {{feed.title}}</span>
     </li>
 {{else}}
     <span>Reading list empty \o/</span>

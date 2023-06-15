@@ -14,6 +14,11 @@ const readingListSchema = new Schema({
         title: {
             type: String,
             required: true,
+        },
+        feed: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: "Feed"
         }
     }]
 });
