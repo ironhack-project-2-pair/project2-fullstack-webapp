@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (websiteUrlInput) {
     console.log("Found websiteUrl input!");
     websiteUrlInput.addEventListener('keyup', getWebSiteDetailsWithDebounce);
-    websiteUrlInput.addEventListener('paste', getWebSiteDetailsWithDelay);
+    websiteUrlInput.addEventListener('paste', getWebSiteDetailsWithDebounce);
   }
 });
 
@@ -42,10 +42,6 @@ function debounce(func, wait) {
 }
 
 const getWebSiteDetailsWithDebounce = debounce(getWebSiteDetails, 500);
-
-async function getWebSiteDetailsWithDelay(event) {
-  setTimeout(getWebSiteDetails, 0);
-}
 
 async function getWebSiteDetails() {
   const url = websiteUrlInput.value;
