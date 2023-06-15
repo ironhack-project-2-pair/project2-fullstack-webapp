@@ -33,8 +33,8 @@ Just a live reader, not a fully-fledged aggregator! (but partially via a reading
 * [x] Feeds READ --> Filter out items based a read date (via click on date Feeds Reader)
     * [x] when grouped by feeds --> read date applies only the feed's items
     * [x] when not grouped --> read date applies to all feeds' items
-    * [ ] when grouped by feeds or not --> remove or hide items filtered out
-    * [ ] when grouped by feeds or not --> fix number of items in feed in title
+    * [x] when grouped by feeds or not --> remove or hide items filtered out
+    * [x] when grouped by feeds or not --> fix number of items in feed in title
 * [ ] Limit items by feeds when grouped (only most recents no matter the order)
 * [ ] Explore all feeds in DB, not only the ones of the user
     * [ ] Subscribe to a feed (add it to current user)
@@ -47,7 +47,7 @@ Just a live reader, not a fully-fledged aggregator! (but partially via a reading
 * [ ] Being able to see (again) all the items of a feed
 * [ ] Keep or extract website url and keep it in mongo to make the feed title a link toward website
 * [ ] Extract image/favicon from feed data ( image/url in https://medium.com/feed/@netbasal )
-* [ ] Send email recap each day/week/user setting with number of new items per feed?
+* [ ] Send email recap each day/week/user setting with number of new items per feed
 
 
 ## Model
