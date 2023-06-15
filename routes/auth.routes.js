@@ -158,9 +158,10 @@ router.get("/logout", isLoggedIn, (req, res) => {
 
 // GET /user-profile
 router.get("/user-profile", isLoggedIn, (req, res) => {
-  FeedModel.find()
-    .then(feeds => {
-      res.render("auth/user-profile", {feeds: feeds});
+  User.findById(req.session.currentUser._id)
+        .populate('feeds')
+    .then(user => {
+      res.render("auth/user-profile", {feeds: user.feeds});
     })
 });
 
