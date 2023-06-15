@@ -11,6 +11,8 @@
 
     <a href="/auth/logout">Logout from {{_locals.session.currentUser.email}}</a>
     {{else}}
+        <p>&nbsp;</p>
+        <span><strong>Your Feeds Reader</strong></span>
         <div>
             <a href="/auth/login">Login</a>
             <a href="/auth/signup">Sign up</a>
@@ -21,6 +23,10 @@
     {{#if session.currentUser}}
         {{> feeds this}}
     {{else}}
-        Please <a href="/auth/login">Login</a> to see your feeds.
-        Don't have an account, please <a href="/auth/signup">Sign up</a>.
+    <center>
+        <p>
+            Please <a href="/auth/login">Login</a> to see your feeds. <br><br>
+            Don't have an account, please <a href="/auth/signup">Sign up</a>.
+        </p>
+    </center>
     {{/if}}
