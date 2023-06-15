@@ -34,8 +34,8 @@ h1, h2, h3 {
   display: inline;
 }
 
-h1 {
-  color: 15px;
+h2 {
+  font-size: 20px;
 }
 
 img {
@@ -83,6 +83,11 @@ button.link:hover {
   margin: 0px;
 }
 
+
+h2>img {
+  height: 20px;
+}
+
 #feeds-display ul {
   padding: 0px;
 }
@@ -94,6 +99,7 @@ button.link:hover {
 
 #feeds-display ul {
   font-size: var(--text-size);
+  margin-bottom: 5px ;
 }
 
 #feeds-display ul img {
