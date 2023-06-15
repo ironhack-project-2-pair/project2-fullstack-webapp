@@ -45,7 +45,7 @@ Just a live reader, not a fully-fledged aggregator! (but partially via a reading
 * [ ] Save older items in a DB if not in feed's item anymore (hourly? daily? user setting?)
 * [ ] Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
 * [x] Open youtube links on [Invidious](https://docs.invidious.io/instances/)
-* [ ] Keep or extract website url and keep it in mongo to make the feed title a link toward website
+* [x] Keep or extract website url and keep it in mongo to make the feed title a link toward website
 * [ ] Extract image/favicon from feed data ( image/url in https://medium.com/feed/@netbasal )
 * [ ] Send email recap each day/week/user setting with number of new items per feed
 * [ ] Import/Export feed list
