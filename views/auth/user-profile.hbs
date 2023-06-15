@@ -1,14 +1,12 @@
-<a href="/">← Return to feed list</a>
-
+<div id="user-profil-header">
+    <a href="/">← Return to feed list</a>
+    <a href="/auth/logout">Logout from {{_locals.session.currentUser.email}}</a>
+</div>
 <h1>User profile</h1>
-
-    <h2>Info</h2>
-
-    <p>Email: <span>{{_locals.session.currentUser.email}}</span></p>
 
     <h2>Settings</h2>
 
-    <div class="settings-feed-reader-group"></div>
+    <div id="settings-feed-reader-group">
         <form method="POST" action="/auth/user-profile/">
 
             <div>
@@ -16,7 +14,7 @@
                 <input type="radio" name="settingsGroup" id="settingsGroupTrue" value="on" {{#if _locals.session.currentUser.settings.group}}checked{{/if}}>
                 <label for="settingsGroupTrue">Grouped by feeds</label>
                 <input type="radio" name="settingsGroup" id="settingsGroupFalse" value="off" {{#unless _locals.session.currentUser.settings.group}}checked{{/unless}}>
-                <label for="settingsGroupFalse">All in one feed</label>
+                <label for="settingsGroupFalse">All in an aggregated feed</label>
             </div>
 
             <div>
@@ -31,25 +29,33 @@
         </form>
     </div>
 
-{{#if feeds}}
-    <h2>My Feeds</h2>
-    <a href="/feeds/create">Add a new Feed</a>
+    <h2 class="display-inline">My Feeds - </h2> 
+    <a href="/feeds/create" class="big-link">Add a new Feed</a>
     <br>
+{{#if feeds}}
     <div id="user-feed-list">
         {{#each feeds}}
-            <div>
+            <div class="feed-config">
                 {{#if faviconUrl}}
                     <img src="{{faviconUrl}}" alt="{{title}} favicon">
                 {{/if}}
-                <span>{{title}} - {{url}}</span>
-                <a href="/feeds/edit/{{_id}}">Edit</a>
-                <form method ="POST" action="/feeds/delete/{{_id}}">
-                    <button class="link" type="submit"> Delete </button>
-                </form>
+                <div>
+                    <span>{{title}}</span>
+                    <span>{{url}}</span>
+                    <div>
+                        <a href="/feeds/edit/{{_id}}">Edit</a> / 
+                        <form method ="POST" action="/feeds/delete/{{_id}}">
+                            <button class="link" type="submit"> Delete </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         {{/each}}
     </div>
 {{else}}
-    <h2>No Feeds</h2>
-    <a href="/feeds/create">Add Feed</a>
+    <div id="list-empty">
+        <p>No Feeds. Please <a href="/feeds/create">add one.</a></p>
+        
+        <img src="https://64.media.tumblr.com/8f693802386c5aed5a1488949bfcafaa/tumblr_mlp8g6qtfm1qj2pybo1_400.gifv" alt="no feeds">
+    </div>
 {{/if}}
