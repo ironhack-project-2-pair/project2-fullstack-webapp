@@ -12,12 +12,15 @@
 
 ### Nice
 
-* [ ] styles with Tailwind
+* [ ] styles with https://tailwindcss.com/
 * [x] fix RSS 1.0 aka RDF, example: http://rss.slashdot.org/Slashdot/slashdot
 * [x] Reading list
     * [x] READ items (list articles)
     * [x] CREATE items (add article)
     * [ ] DELETE items (clear all articles)
+    * [ ] Check to not introduce double
+    * [ ] Remove on opening (?)
+    * [ ] Favicon / feed name
 * [x] Feeds CREATE --> Extract feeds from a web page source HTML code
     * [x] Extract feed favicon
     * [x] Extract feed title
@@ -39,6 +42,11 @@
 * [ ] Preview of posts
 * [ ] Save older items in a DB if not in feed's item anymore
 * [ ] Query online RSS feed DB (if it exists!) https://www.rsssearchhub.com/
+* [ ] Open youtube links on [Invidious](https://docs.invidious.io/instances/)
+* [ ] Being able to see (again) all the items of a feed
+* [ ] Keep or extract website url and keep it in mongo to make the feed title a link toward website
+* [ ] Extract image/favicon from feed data ( image/url in https://medium.com/feed/@netbasal )
+
 
 ## Model
 
