@@ -83,6 +83,9 @@ button.link:hover {
   margin: 0px;
 }
 
+#feeds-display a {
+  color: #dbd3d3;
+}
 
 h2>img {
   height: 20px;
@@ -142,6 +145,10 @@ h2>img {
 
 #reading-list img {
   height: var(--text-size);
+}
+
+#reading-list #list-empty img {
+  height: auto;
 }
 
 #reading-list form {
