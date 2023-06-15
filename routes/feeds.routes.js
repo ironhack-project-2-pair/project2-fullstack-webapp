@@ -12,6 +12,12 @@ const tryFetchFeedContent = require("../utils/fetchFeed")
 const HTMLParser = require("node-html-parser")
 const URL = require("node:url")
 
+/********/
+/* READ */
+/********/
+
+// --> index route
+
 /**************/
 /* READ > API */
 /**************/
@@ -144,6 +150,23 @@ router.post("/edit/:id", isLoggedIn, (req, res) => {
     FeedModel.findByIdAndUpdate(req.params.id, req.body)
         .then(() => {
             res.redirect("/auth/user-profile")
+        })
+        .catch(e => {console.log(e)})
+})
+
+router.post("/edit/reset-read-date/:id", isLoggedIn, (req, res) => {
+    UserModel.findById(req.session.currentUser._id)
+        .then(user => {
+            // console.log(user.feedReadDates.get(req.params.id))
+            if (req.params.id !== "all-feeds-items") {
+                user.feedReadDates.delete(req.params.id)
+            } else {
+                user.feedReadDates.clear()
+            }
+            return UserModel.findByIdAndUpdate(req.session.currentUser._id, user)
+        })
+        .then(_ => {
+            res.redirect("/")
         })
         .catch(e => {console.log(e)})
 })

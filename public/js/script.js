@@ -38,13 +38,12 @@ function patchFeedReadDate(feedId, isoDate, itemIndex) {
     })
     .then(data => {
       let div;
-      console.log(feedId);
       if (data.group) {
         div = document.getElementById(feedId);
       } else {
         div = document.getElementById("all-feeds-items");
       }
-      
+
       const liHtmlCollection = div.getElementsByTagName("li");
       if (data.order === 1) { // ascending / oldest first
         [...liHtmlCollection]

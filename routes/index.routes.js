@@ -79,7 +79,7 @@ router.get("/", async (req, res, next) => {
         // clear feedsContent
         // feedsContent.splice(0, feedsContent.length)
         feedsContent.length = 0
-        feedsContent.push({title: "All feeds items", items: feedsItemsAll});
+        feedsContent.push({title: "All feeds items", id: "all-feeds-items", items: feedsItemsAll});
       }
 
       res.render("index", { feeds : feedsContent, feedsInError });

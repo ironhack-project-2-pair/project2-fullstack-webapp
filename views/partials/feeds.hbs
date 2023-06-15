@@ -1,14 +1,13 @@
 {{#each this.feeds}}
-    {{#if ../_locals.session.currentUser.settings.group}}
-        <div id="{{this.id}}">
-    {{else}}
-        <div id="all-feeds-items">
-    {{/if}}
+    <div id="{{this.id}}"> {{!-- {{#if ../_locals.session.currentUser.settings.group}} id === "all-feeds-items" --}}
         <h2>
             {{#if faviconUrl}}
                 <img src="{{faviconUrl}}" alt="{{title}} favicon">
             {{/if}}
-            {{title}} (<span>{{items.length}}</span>)
+            {{title}} (<span>{{items.length}}</span>) |
+            <form method="POST" action="/feeds/edit/reset-read-date/{{this.id}}"> 
+                <button type="submit"> Reset read date </button>
+            </form>
         </h2>
         <ul>
         {{#each items}}
