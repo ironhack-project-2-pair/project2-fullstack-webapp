@@ -2,16 +2,22 @@
 
 <header>
     {{#if session.currentUser}}
-        <a href="/auth/logout">Logout</a>
-        <a href="/auth/user-profile">User Profile</a>
-        <a href="/reading-list">Reading list</a>
+    <div>
+        <a href="/reading-list">📑Reading list</a>
+        <a href="/auth/user-profile">⚙️User Profile</a>
+    </div>
+
+    <span><strong>Your Feeds Reader</strong></span>
+
+    <a href="/auth/logout">Logout from {{_locals.session.currentUser.email}}</a>
     {{else}}
-        <a href="/auth/login">Login</a>
-        <a href="/auth/signup">Sign up</a>
+        <div>
+            <a href="/auth/login">Login</a>
+            <a href="/auth/signup">Sign up</a>
+        </div>
     {{/if}}
 </header>
 
-<h1>Feeds Reader</h1>
     {{#if session.currentUser}}
         {{> feeds this}}
     {{else}}

@@ -1,3 +1,5 @@
+<div id="feeds-display">
+
 {{#each this.feeds}}
     <div id="{{this.id}}"> {{!-- {{#if ../_locals.session.currentUser.settings.group}} id === "all-feeds-items" --}}
         <h2>
@@ -10,9 +12,9 @@
             <a href="{{this.link}}">
             {{/if}}
             {{title}}
-            </a> (<span>{{items.length}}</span>) |
+            </a> (<span>{{items.length}}</span>) -
             <form method="POST" action="/feeds/edit/reset-read-date/{{this.id}}"> 
-                <button type="submit"> Reset read date </button>
+                <button class="link" type="submit"> Reset read date </button>
             </form>
         </h2>
         <ul>
@@ -70,3 +72,4 @@
         
     </div>
 {{/if}}
+</div>
