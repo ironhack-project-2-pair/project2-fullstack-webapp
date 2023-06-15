@@ -2,7 +2,7 @@
 
 <h1>Your reading list</h1>
 
-
+<div id="reading-list">
 <ul>
 {{#each this.links}}
     <li>
@@ -10,11 +10,21 @@
             {{#if feed.faviconUrl}}
                 <img src="{{feed.faviconUrl}}" alt="{{title}} favicon">
             {{/if}}
-    <a href="{{url}}" target="_blank">{{title}}</a> - {{feed.title}}</span>
+            <a href="{{url}}" target="_blank">{{title}}</a> - {{feed.title}}
+            <form method ="POST" action="/reading-list/delete">
+                <input type="hidden" name="url" value="{{url}}" >
+                <button class="link" type="submit"> Delete </button>
+            </form>
+        </span>
     </li>
 {{else}}
-    <span>Reading list empty \o/</span>
+    <div id="reading-list-empty">
+        <p>Reading list empty \o/</p>
+        <img src="https://media4.giphy.com/media/s4jx2lE5yGfS0/giphy.gif?cid=ecf05e47rf0k6txwipoazokij5x3b2ikhlqkw11odie0nrla&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="nothing out there">
+    </div>
 {{/each}}
 </ul>
 
 <a href="/">← Return to your feeds list</a>
+
+</div>

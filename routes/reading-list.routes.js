@@ -15,7 +15,7 @@ router.get("/", isLoggedIn, async (req, res) => {
         .populate("links.feed");
     //console.log("reading list:", readingList.links);
     res.render('readingList/all', { links: readingList.links });
-})
+});
 
 /**************/
 /* READ > API */
@@ -41,6 +41,15 @@ router.post("/add", isLoggedIn, async (req, res) => {
         console.log("adding to readin list error:", error);
         res.status(500).json({success: false});
     }
-})
+});
+
+router.post("/delete", isLoggedIn, async (req, res) => {
+    ReadingList.findOneAndUpdate({ userId: req.session.currentUser._id }, { $pull: { links: { url: req.body.url}}})
+    .then(_ => res.redirect('/reading-list'))
+    .catch(e => {
+        console.log("error when deleting", e);
+        res.redirect('/reading-list');
+    })
+});
 
 module.exports = router;

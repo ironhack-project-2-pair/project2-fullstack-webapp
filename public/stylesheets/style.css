@@ -49,3 +49,20 @@ button.link:hover {
   display: inline-block;
   margin: 0px;
 }
+
+/* READING LIST */
+#reading-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#reading-list form {
+  display: inline-block;
+  margin: 0px;
+}
+
+#reading-list-empty img {
+  width: 50%;
+  height: auto;
+}
