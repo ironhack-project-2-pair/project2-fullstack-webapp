@@ -63,7 +63,14 @@ router.post("/create", isLoggedIn, (req, res) => {
     UserModel.findById(req.session.currentUser._id)
         .then(userFromDB => {
             user = userFromDB;
-            return FeedModel.create(req.body)
+            // const {websiteUrl, ...feed} = req.body; // remove a property with destructuring and rest operator
+            // return FeedModel.create(feed);
+            // now websiteUrl has been added to the Feed model:
+            if (!req.body.websiteUrl) { // use the domain from the feed url
+                // match returns an array, at index 0 is the match, the 1+ indexes contain capturing groups
+                req.body.websiteUrl = req.body.url.match(/^(https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\/?).*$/)[1]
+            }
+            return FeedModel.create(req.body);
         })
         .then((feedFromDB) => {
             user.feeds.push(feedFromDB)

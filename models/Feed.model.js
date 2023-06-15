@@ -15,6 +15,11 @@ const feedSchema = new Schema({
         // required: true,
         validate: /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
     },
+    websiteUrl: {
+        type: String,
+        required: false,
+        validate: /^$|^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+    },
 })
 
 module.exports = model("Feed", feedSchema);

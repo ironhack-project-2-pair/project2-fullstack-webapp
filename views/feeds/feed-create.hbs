@@ -2,15 +2,14 @@
 
 <h1>Add Feed</h1>
 
-<label>
-    Extract feed data from web Url: 
-        <input type="url" id="websiteUrl">
-</label>
-
-
-<span>-- Or -- </span>
-
 <form method="POST" action="/feeds/create">
+    <label>
+    Extract feed from website url: 
+        <input type="url" name="websiteUrl" id="websiteUrl">
+    </label>
+
+    <span>-- OR MANUALLY --</span>
+
     <label>
         Title: 
         <input type="text" name="title" id="title" required>

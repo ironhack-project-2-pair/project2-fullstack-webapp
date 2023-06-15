@@ -38,6 +38,7 @@ router.get("/", async (req, res, next) => {
           feedContent.title = feed.title ?? feedContent.title;
           feedContent.faviconUrl = feed.faviconUrl;
           feedContent.id = feed._id;
+          feedContent.websiteUrl = feed.websiteUrl;
           // add new properties to feed's items
           feedContent.items.forEach(item => {
             item.feedId = feed._id

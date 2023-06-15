@@ -4,7 +4,13 @@
             {{#if faviconUrl}}
                 <img src="{{faviconUrl}}" alt="{{title}} favicon">
             {{/if}}
-            <a href="{{this.link}}">{{title}}</a> (<span>{{items.length}}</span>) |
+            {{#if this.websiteUrl}}
+            <a href="{{this.websiteUrl}}">
+            {{else}}
+            <a href="{{this.link}}">
+            {{/if}}
+            {{title}}
+            </a> (<span>{{items.length}}</span>) |
             <form method="POST" action="/feeds/edit/reset-read-date/{{this.id}}"> 
                 <button type="submit"> Reset read date </button>
             </form>
