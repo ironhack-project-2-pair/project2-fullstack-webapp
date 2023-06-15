@@ -12,6 +12,9 @@ const tryFetchFeedContent = require("../utils/fetchFeed")
 const HTMLParser = require("node-html-parser")
 const URL = require("node:url")
 
+/**************/
+/* READ > API */
+/**************/
 
 router.patch("/read-date", isLoggedIn, (req, res) => {
     UserModel.findById(req.session.currentUser._id)
@@ -23,7 +26,7 @@ router.patch("/read-date", isLoggedIn, (req, res) => {
             const readDate = new Date(req.body.isoDate);
             user.feedReadDates.set(req.body.feedId, readDate);
             if (!req.session.currentUser.settings.group) {
-                //For all users feed, set the date received
+                // for all users feed, set the read date received
                 user.feeds.forEach(key => {
                     const currentDate = user.feedReadDates.get(key);
                     if(!currentDate || readDate > user.feedReadDates.get(key)) {
@@ -36,10 +39,10 @@ router.patch("/read-date", isLoggedIn, (req, res) => {
         })
         .then(_ => {
             res.status(200);
+            res.json(req.session.currentUser.settings);
         })
         .catch(e => res.status(500).json({ error : e }))
 })
-
 
 /**********/
 /* CREATE */
@@ -66,25 +69,9 @@ router.post("/create", isLoggedIn, (req, res) => {
         .catch(e => {console.log(e)})
 })
 
-/********/
-/* EDIT */
-/********/
-
-router.get("/edit/:id", isLoggedIn, (req, res) => {
-    FeedModel.findById(req.params.id)
-        .then(feed => {
-            res.render("feeds/feed-edit", {feed: feed})
-        })
-        .catch(e => {console.log(e)})
-})
-
-router.post("/edit/:id", isLoggedIn, (req, res) => {
-    FeedModel.findByIdAndUpdate(req.params.id, req.body)
-        .then(() => {
-            res.redirect("/auth/user-profile")
-        })
-        .catch(e => {console.log(e)})
-})
+/****************/
+/* CREATE > API */
+/****************/
 
 router.get("/details", isLoggedIn, async (req, res) => {
     const result = {};
@@ -139,6 +126,26 @@ router.get("/details", isLoggedIn, async (req, res) => {
     }
 
     res.json(result);
+})
+
+/********/
+/* EDIT */
+/********/
+
+router.get("/edit/:id", isLoggedIn, (req, res) => {
+    FeedModel.findById(req.params.id)
+        .then(feed => {
+            res.render("feeds/feed-edit", {feed: feed})
+        })
+        .catch(e => {console.log(e)})
+})
+
+router.post("/edit/:id", isLoggedIn, (req, res) => {
+    FeedModel.findByIdAndUpdate(req.params.id, req.body)
+        .then(() => {
+            res.redirect("/auth/user-profile")
+        })
+        .catch(e => {console.log(e)})
 })
 
 /**********/

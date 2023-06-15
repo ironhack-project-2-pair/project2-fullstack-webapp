@@ -38,6 +38,10 @@ router.get("/", async (req, res, next) => {
           feedContent.title = feed.title ?? feedContent.title;
           feedContent.faviconUrl = feed.faviconUrl;
           feedContent.id = feed._id;
+          // add new properties to feed's items
+          feedContent.items.forEach(item => {
+            item.feedId = feed._id
+          })
           // sort by date ascending (oldest first) / descending (newest first)
           feedContent.items.sort((a, b) => (new Date(a.isoDate) - new Date(b.isoDate)) * req.session.currentUser.settings.order)
           // filter items by feed read date

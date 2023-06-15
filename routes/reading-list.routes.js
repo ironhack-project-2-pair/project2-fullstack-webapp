@@ -5,10 +5,19 @@ const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 const ReadingList = require("../models/ReadingList.model")
+
+/********/
+/* READ */
+/********/
+
 router.get("/", isLoggedIn, async (req, res) => {
     const readingList = await ReadingList.findOne({userId: req.session.currentUser._id});
     res.render('readingList/all', { links: readingList.links });
 })
+
+/**************/
+/* READ > API */
+/**************/
 
 router.post("/add", isLoggedIn, async (req, res) => {
     try {
@@ -31,6 +40,5 @@ router.post("/add", isLoggedIn, async (req, res) => {
         res.status(500).json({success: false});
     }
 })
-
 
 module.exports = router;

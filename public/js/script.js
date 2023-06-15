@@ -20,8 +20,8 @@ function addToReadList(title, url) {
   })
 }
 
-function patchFeedReadDate(feedId, isoDate) {
-  console.log("Will save date for feed", { feedId, isoDate });
+function patchFeedReadDate(feedId, isoDate, itemIndex) {
+  console.log("Will save date for feed", { feedId, isoDate, itemIndex });
   fetch("/feeds/read-date", {
     method: "PATCH",
     headers: {
@@ -29,6 +29,38 @@ function patchFeedReadDate(feedId, isoDate) {
     },
     body: JSON.stringify({ feedId, isoDate })
   })
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error('server-side error');
+      }
+    })
+    .then(data => {
+      let div;
+      console.log(feedId);
+      if (data.group) {
+        div = document.getElementById(feedId);
+      } else {
+        div = document.getElementById("all-feeds-items");
+      }
+      console.log(div);
+      
+      const liHtmlCollection = div.getElementsByTagName("li");
+      if (data.order === 1) { // ascending / oldest first
+        [...liHtmlCollection]
+          .filter(liDomElement => liDomElement.dataset.index <= +itemIndex)
+          .forEach(liDomElement => liDomElement.remove());
+      } else if (data.order === -1) { // descending / newest first
+        [...liHtmlCollection]
+          .filter(liDomElement => liDomElement.dataset.index >= +itemIndex)
+          .forEach(liDomElement => liDomElement.remove());
+      }
+
+    })
+    .catch(error => {
+      console.error(error);
+    });
 }
 
 function debounce(func, wait) {

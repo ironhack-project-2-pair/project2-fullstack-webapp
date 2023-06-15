@@ -1,16 +1,21 @@
 {{#each this.feeds}}
-    <h2>
-        {{#if faviconUrl}}
-            <img src="{{faviconUrl}}" alt="{{title}} favicon">
-        {{/if}}
-        {{title}} ({{items.length}})
-    </h2>
+    {{#if ../_locals.session.currentUser.settings.group}}
+        <div id="{{this.id}}">
+    {{else}}
+        <div id="all-feeds-items">
+    {{/if}}
+        <h2>
+            {{#if faviconUrl}}
+                <img src="{{faviconUrl}}" alt="{{title}} favicon">
+            {{/if}}
+            {{title}} ({{items.length}})
+        </h2>
         <ul>
         {{#each items}}
-            <li>
+            <li data-index={{@index}}>
                 <span>[
-                    <a onclick="(() => patchFeedReadDate('{{feedId}}','{{isoDate}}'))()" 
-                    href="javascript:void(0);" title="Remove all item until this one">
+                    <a onclick="(() => patchFeedReadDate('{{feedId}}','{{isoDate}}','{{@index}}'))()" 
+                    href="javascript:void(0);" title="Remove all items older than this one (this one included)"></a>>
                         {{formatedDate}}</a>
                      | 
                     <a onclick="(() => addToReadList('{{title}}','{{id}}'))()" 
@@ -35,6 +40,7 @@
             </li>
         {{/each}}
         </ul>
+    </div>
 {{else}}
     <p>All feeds with error 😥</p>
 {{/each}}

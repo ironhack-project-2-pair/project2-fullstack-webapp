@@ -68,7 +68,11 @@ mongoose
   })
   .then(feedsFromDB => {
     console.log(`Created ${feedsFromDB.length} feeds`);
-    return User.findByIdAndUpdate(firstUser._id, {feeds: feedsFromDB.map(f => f._id)});
+    return User.findByIdAndUpdate(firstUser._id, 
+      {
+        feeds: feedsFromDB.map(f => f._id), 
+        $unset: {feedReadDates: 1}
+      });
   })
   .then(() => {
     // Once created, close the DB connection

@@ -50,6 +50,17 @@ hbs.registerHelper('ifAreEqual', function(arg1, arg2, options) {
 // https://handlebarsjs.com/guide/builtin-helpers.html#sub-expressions
 hbs.registerHelper('eqStrict', (a, b) => a === b)
 hbs.registerHelper('eqLoose', (a, b) => a == b)
+hbs.registerHelper('math', function(lvalue, operator, rvalue) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+    return {
+        "+": lvalue + rvalue,
+        "-": lvalue - rvalue,
+        "*": lvalue * rvalue,
+        "/": lvalue / rvalue,
+        "%": lvalue % rvalue
+    }[operator];
+})
 
 /********************/
 /* Our Config > END */
