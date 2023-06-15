@@ -7,26 +7,40 @@
         <a href="/auth/user-profile">⚙️User Profile</a>
     </div>
 
-    <span><strong>Your Feeds Reader</strong></span>
+    <span><strong>Your Feeds Reader, {{_locals.session.currentUser.username}}!</strong></span>
 
     <a href="/auth/logout">Logout from {{_locals.session.currentUser.email}}</a>
     {{else}}
         <p>&nbsp;</p>
         <span><strong>Your Feeds Reader</strong></span>
-        <div>
-            <a href="/auth/login">Login</a>
-            <a href="/auth/signup">Sign up</a>
-        </div>
+        <p>&nbsp;</p>
     {{/if}}
 </header>
 
     {{#if session.currentUser}}
         {{> feeds this}}
     {{else}}
-    <center>
-        <p>
-            Please <a href="/auth/login">Login</a> to see your feeds. <br><br>
-            Don't have an account, please <a href="/auth/signup">Sign up</a>.
-        </p>
-    </center>
+        <div class="login">
+            <p>Please login to see your feeds.</p>
+            <br><br>
+
+            <form action="/auth/login" method="POST">
+                <label> Email
+                <input type="email" name="email" placeholder="Your email" required />
+                </label>
+
+                <label> Password
+                <input type="password" name="password" placeholder="Your password" required />
+                </label>
+
+                <button type="submit">Log In</button>
+
+
+                {{#if errorMessage}}
+                <p class="error">{{errorMessage}}</p>
+                {{/if}}
+            </form>
+
+            <p>Don't have an account, please <a href="/auth/signup">Sign up</a>.</p>
+        </div>
     {{/if}}
