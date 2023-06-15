@@ -47,6 +47,7 @@ Just a live reader, not a fully-fledged aggregator! (but partially via a reading
 * [ ] Being able to see (again) all the items of a feed
 * [ ] Keep or extract website url and keep it in mongo to make the feed title a link toward website
 * [ ] Extract image/favicon from feed data ( image/url in https://medium.com/feed/@netbasal )
+* [ ] Send email recap each day/week/user setting with number of new items per feed?
 
 
 ## Model
