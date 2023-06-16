@@ -103,7 +103,7 @@ router.get("/details", isLoggedIn, async (req, res) => {
         // console.log("parse", parsedBody);
     } catch (error) {
         console.log("Fail to reach website or parse content :(", error);
-        res.status(500).json({error});
+        res.status(500).json({error, ...result});
         return;
     }
 
