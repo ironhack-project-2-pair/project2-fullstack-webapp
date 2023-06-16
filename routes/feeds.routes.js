@@ -8,6 +8,7 @@ const FeedModel = require("../models/Feed.model")
 const UserModel = require("../models/User.model")
 
 const tryFetchFeedContent = require("../utils/fetchFeed")
+const axios = require('axios');
 
 const HTMLParser = require("node-html-parser")
 const URL = require("node:url")
@@ -93,12 +94,15 @@ router.get("/details", isLoggedIn, async (req, res) => {
     try {
         console.log("url", req.query.url);
         result.step += req.query.url;
-        const response = await fetch(req.query.url);
+        
+        // console.log("url_with_axios", req.query.url);
+        const response = await axios.get(req.query.url);
         result.step = "WILL_GET_CONTENT";
-        const body = await response.text();
+        const body = response.data;
         result.step = "WILL_PARSE";
         // console.log("body", body);
         parsedBody = HTMLParser.parse(body);
+        // console.log("parses_with_axios", body);
         result.step = "PARSED";
         // console.log("parse", parsedBody);
     } catch (error) {
@@ -126,7 +130,7 @@ router.get("/details", isLoggedIn, async (req, res) => {
         const faviconUrl = new URL.URL("/favicon.ico", req.query.url).href;
         
         try {
-            await fetch(faviconUrl, { method: "HEAD" });
+            await axios.head(faviconUrl);
             result.faviconUrl = faviconUrl;
             console.log("Default favicon found!", faviconUrl);
         } catch (error) {
