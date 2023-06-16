@@ -88,13 +88,18 @@ router.post("/create", isLoggedIn, (req, res) => {
 
 router.get("/details", isLoggedIn, async (req, res) => {
     const result = {};
+    result.step = "WILL_FETCH:";
     let parsedBody
     try {
         console.log("url", req.query.url);
+        result.step += req.query.url;
         const response = await fetch(req.query.url);
+        result.step = "WILL_GET_CONTENT";
         const body = await response.text();
+        result.step = "WILL_PARSE";
         // console.log("body", body);
         parsedBody = HTMLParser.parse(body);
+        result.step = "PARSED";
         // console.log("parse", parsedBody);
     } catch (error) {
         console.log("Fail to reach website or parse content :(", error);
@@ -140,6 +145,7 @@ router.get("/details", isLoggedIn, async (req, res) => {
         }
     }
 
+    result.step = "DATA_EXTRACTED";
     res.json(result);
 })
 
