@@ -98,7 +98,7 @@ router.get("/details", isLoggedIn, async (req, res) => {
         // console.log("parse", parsedBody);
     } catch (error) {
         console.log("Fail to reach website or parse content :(", error);
-        res.json(result);
+        res.status(500).json({error});
         return;
     }
 
@@ -111,6 +111,7 @@ router.get("/details", isLoggedIn, async (req, res) => {
             return urlExtracted;
         } catch (error) {
             console.log(`"Fail to get ${querySelector} data :(`, error);
+            result.error = error;
             return null;
         }
     }
@@ -125,6 +126,7 @@ router.get("/details", isLoggedIn, async (req, res) => {
             console.log("Default favicon found!", faviconUrl);
         } catch (error) {
             console.log("Default favicon not available :(", faviconUrl);
+            result.error = error;
         }
     }
   
